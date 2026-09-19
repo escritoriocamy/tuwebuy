@@ -29,6 +29,8 @@
     --shadow-glow:0 0 64px rgba(214,251,0,.35);
     --font-display:'Space Grotesk', system-ui, sans-serif;
     --font-body:'Manrope', system-ui, sans-serif;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   *{box-sizing:border-box;}
@@ -58,7 +60,9 @@
   .brand{font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-.01em; text-decoration:none;}
   nav.links{display:flex; gap:var(--space-6); font-size:14px; font-weight:600;}
   nav.links a{text-decoration:none; color:var(--ink-muted); transition:color .2s ease;}
-  nav.links a:hover{color:var(--ink);}
+  @media (hover:hover) and (pointer:fine){
+    nav.links a:hover{color:var(--ink);}
+  }
   .nav-cta{
     display:inline-flex; align-items:center; padding:var(--space-2) var(--space-4);
     background:var(--accent-lime); color:var(--on-accent-lime); border-radius:var(--radius-full);
@@ -72,13 +76,16 @@
     padding:var(--space-3) var(--space-5); border-radius:var(--radius-full);
     font-family:var(--font-body); font-weight:700; font-size:15px;
     text-decoration:none; border:none; cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    transition:transform .12s var(--ease-out), box-shadow .15s ease, opacity .15s ease, border-color .15s ease;
   }
   .btn-primary{background:var(--accent-lime); color:var(--on-accent-lime);}
-  .btn-primary:hover{box-shadow:var(--shadow-glow); transform:scale(1.02);}
   .btn-secondary{background:transparent; color:var(--ink); border:1.5px solid var(--border);}
-  .btn-secondary:hover{border-color:var(--ink);}
   .btn-disabled{background:var(--accent-lime); color:var(--on-accent-lime); opacity:.45; pointer-events:none;}
+  @media (hover:hover) and (pointer:fine){
+    .btn-primary:hover{box-shadow:var(--shadow-glow); transform:scale(1.02);}
+    .btn-secondary:hover{border-color:var(--ink);}
+  }
+  .btn:active{transform:scale(.97); transition-duration:.1s;}
 
   /* Hero */
   .hero{position:relative; overflow:hidden; padding:calc(var(--space-9) + var(--space-4)) 0 var(--space-9);}
@@ -91,7 +98,7 @@
   .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h1.headline{
     font-family:var(--font-display); font-weight:700; color:var(--ink);
-    font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.01em;
+    font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.02em;
     margin:var(--space-4) 0 var(--space-5); max-width:15ch;
   }
   .hero p.lead{font-size:19px; line-height:1.55; color:var(--ink-muted); max-width:520px; margin:0 0 var(--space-6);}
@@ -150,13 +157,16 @@
   footer{padding:var(--space-6) 0 var(--space-8); color:var(--ink-muted); font-size:13px; text-align:center;}
 
   /* Scroll reveal */
-  [data-reveal]{opacity:0; transform:translateY(24px); transition:opacity .6s ease-out, transform .6s ease-out;}
+  [data-reveal]{opacity:0; transform:translateY(20px); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);}
   [data-reveal].is-visible{opacity:1; transform:none;}
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .glow{animation:none !important;}
-    [data-reveal]{transition:opacity .3s ease-out; transform:none;}
+    [data-reveal]{transform:none; transition:opacity .3s ease;}
+  }
+  @media (prefers-reduced-transparency: reduce){
+    header.site{background:var(--bg-canvas); backdrop-filter:none;}
   }
 </style>
 </head>
@@ -205,13 +215,13 @@
           <p>Más de un siglo acompañando al productor rural, con remates de hacienda en vivo y buscador de lotes.</p>
           <a class="btn btn-primary" href="https://escritoriocamy.com" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal style="transition-delay:.1s">
+        <article class="client-card" data-reveal style="transition-delay:.07s">
           <span class="rubro">Salud</span>
           <h3>Consultorio Oftalmológico</h3>
           <p>Agenda de turnos oftalmológicos sin espera, en San José de Mayo.</p>
           <a class="btn btn-primary" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal style="transition-delay:.2s">
+        <article class="client-card" data-reveal style="transition-delay:.14s">
           <span class="rubro">Remates y liquidación</span>
           <h3>Siguiendo el Camino</h3>
           <p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p>
