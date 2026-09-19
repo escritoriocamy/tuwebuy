@@ -139,6 +139,40 @@
     50%{border-radius:58% 42% 35% 65% / 55% 55% 45% 45%;}
   }
 
+  /* Loud decorative extras — doodle arrows, floating site chips, a spinning
+     badge — the "more elements, more loaded" pass. */
+  .doodle{position:absolute; z-index:2; width:96px; height:auto; pointer-events:none;}
+  .doodle-a{top:14%; left:39%; transform:rotate(-8deg);}
+  .doodle-b{bottom:10%; left:30%; width:80px; transform:rotate(155deg) scaleX(-1);}
+
+  .float-chip{
+    position:absolute; z-index:2; display:flex; align-items:center; gap:var(--space-3);
+    padding:var(--space-3) var(--space-4); border-radius:var(--radius-md);
+    background:linear-gradient(160deg, rgba(248,248,255,.14), rgba(248,248,255,.04));
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(248,248,255,.22); box-shadow:var(--shadow-card);
+  }
+  .float-chip-dot{width:34px; height:34px; border-radius:var(--radius-sm); flex:none; background:var(--accent-lime);}
+  .float-chip strong{display:block; font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--ink);}
+  .float-chip span{display:block; font-size:11px; color:var(--ink-muted);}
+  .float-chip-a{top:8%; right:6%; transform:rotate(-7deg);}
+  .float-chip-a .float-chip-dot{background:var(--accent-blue);}
+  .float-chip-b{top:44%; right:1%; transform:rotate(5deg);}
+
+  .spin-badge{position:absolute; z-index:2; width:132px; height:132px; bottom:6%; right:14%;}
+  .spin-badge-ring{width:100%; height:100%; animation:badge-spin 16s linear infinite; fill:var(--on-accent-lime);}
+  .spin-badge-bg{fill:var(--accent-lime);}
+  .spin-badge-arrow{
+    position:absolute; inset:0; margin:auto; width:22px; height:22px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--on-accent-lime); font-size:22px; font-weight:800;
+  }
+  @keyframes badge-spin{to{transform:rotate(360deg);}}
+
+  @media (max-width:720px){
+    .doodle, .float-chip, .spin-badge{display:none;}
+  }
+
   .hero .wrap{position:relative;}
   .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h1.headline{
@@ -242,6 +276,7 @@
     [data-parallax]{translate:none !important;}
     .marquee-track{animation:none;}
     .step{transform:none; opacity:1; transition:none;}
+    .spin-badge-ring{animation:none;}
   }
   @media (prefers-reduced-transparency: reduce){
     header.site{background:var(--bg-canvas); backdrop-filter:none;}
@@ -274,6 +309,36 @@
     <div class="glow glow-a" data-parallax="0.22"></div>
     <div class="glow glow-b" data-parallax="-0.16"></div>
     <div class="hero-blob" data-parallax="0.1" aria-hidden="true"></div>
+
+    <svg class="doodle doodle-a" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+      <path d="M8 14 C 44 4, 18 60, 56 52 C 82 47, 68 18, 96 26" stroke="var(--accent-lime)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M80 14 L98 26 L82 42" stroke="var(--accent-lime)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="doodle doodle-b" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+      <path d="M8 14 C 44 4, 18 60, 56 52 C 82 47, 68 18, 96 26" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M80 14 L98 26 L82 42" stroke="var(--ink)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="float-chip float-chip-a" data-parallax="0.09" aria-hidden="true">
+      <span class="float-chip-dot"></span>
+      <div><strong>Escritorio Camy</strong><span>sitio real</span></div>
+    </div>
+    <div class="float-chip float-chip-b" data-parallax="-0.07" aria-hidden="true">
+      <span class="float-chip-dot"></span>
+      <div><strong>Consultorio Oftalmológico</strong><span>turnos online</span></div>
+    </div>
+
+    <div class="spin-badge" data-parallax="0.05" aria-hidden="true">
+      <svg class="spin-badge-ring" viewBox="0 0 200 200">
+        <circle class="spin-badge-bg" cx="100" cy="100" r="98"/>
+        <defs><path id="badgePath" d="M 100,100 m -74,0 a 74,74 0 1,1 148,0 a 74,74 0 1,1 -148,0"/></defs>
+        <text font-size="13" font-weight="700" letter-spacing="2">
+          <textPath href="#badgePath">• SITIOS LISTOS EN DÍAS • SITIOS LISTOS EN DÍAS </textPath>
+        </text>
+      </svg>
+      <span class="spin-badge-arrow">↗</span>
+    </div>
+
     <div class="wrap">
       <span class="eyebrow" data-reveal>tuwebuy</span>
       <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, <em class="accent">lista para vender.</em></h1>
