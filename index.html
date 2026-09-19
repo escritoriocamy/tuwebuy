@@ -7,18 +7,17 @@
 <meta name="description" content="tuwebuy: sitios web a medida para tu negocio. Diseño, desarrollo y entrega en días. Mirá sitios reales que ya hicimos." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-canvas:#020143;
-    --bg-surface:#00545f;
+    --bg-surface:#070f4a;
     --ink:#f8f8ff;
     --ink-muted:rgba(248,248,255,.64);
-    --border:rgba(248,248,255,.14);
+    --border:rgba(248,248,255,.16);
     --accent-lime:#d6fb00;
     --accent-lime-tint:#ecffb6;
     --accent-blue:#0805f1;
-    --accent-teal:#00545f;
     --on-accent-lime:#020143;
     --on-accent-blue:#f8f8ff;
     --focus-ring:#d6fb00;
@@ -27,7 +26,7 @@
     --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
     --shadow-card:0 12px 32px rgba(2,1,67,.28);
     --shadow-glow:0 0 64px rgba(214,251,0,.35);
-    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-display:'Outfit', system-ui, sans-serif;
     --font-body:'Manrope', system-ui, sans-serif;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -42,6 +41,18 @@
     font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+  }
+  /* Ambient wash that runs behind the whole page — navy to blue to lime,
+     echoing the brand's gradient reference — instead of flat color blocks. */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 46% at 12% 88%, rgba(8,5,241,.4), transparent 62%),
+      radial-gradient(ellipse 52% 40% at 90% 8%, rgba(214,251,0,.16), transparent 60%);
+  }
+  @media (prefers-reduced-transparency: reduce){
+    body::before{display:none;}
   }
   a{color:inherit;}
   img{max-width:100%;display:block;}
@@ -80,7 +91,7 @@
   }
   .btn-primary{background:var(--accent-lime); color:var(--on-accent-lime);}
   .btn-secondary{background:transparent; color:var(--ink); border:1.5px solid var(--border);}
-  .btn-disabled{background:var(--accent-lime); color:var(--on-accent-lime); opacity:.45; pointer-events:none;}
+  .btn-disabled{background:var(--bg-canvas); color:var(--ink-muted); border:1.5px solid var(--border); pointer-events:none;}
   @media (hover:hover) and (pointer:fine){
     .btn-primary:hover{box-shadow:var(--shadow-glow); transform:scale(1.02);}
     .btn-secondary:hover{border-color:var(--ink);}
@@ -97,7 +108,7 @@
   .hero .wrap{position:relative;}
   .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h1.headline{
-    font-family:var(--font-display); font-weight:700; color:var(--ink);
+    font-family:var(--font-display); font-weight:800; color:var(--ink);
     font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.02em;
     margin:var(--space-4) 0 var(--space-5); max-width:15ch;
   }
@@ -108,7 +119,7 @@
   section{padding:var(--space-8) 0;}
   .section-head{max-width:640px; margin:0 0 var(--space-7);}
   .section-label{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
-  h2.section-title{font-family:var(--font-display); font-weight:700; font-size:clamp(28px,4vw,40px); line-height:1.08; margin:var(--space-3) 0 var(--space-3); color:var(--ink);}
+  h2.section-title{font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.08; letter-spacing:-.01em; margin:var(--space-3) 0 var(--space-3); color:var(--ink);}
   .section-head p{color:var(--ink-muted); font-size:16px; line-height:1.6; margin:0;}
 
   /* Client cards */
@@ -149,7 +160,7 @@
     padding:var(--space-8) var(--space-7);
     display:flex; align-items:center; justify-content:space-between; gap:var(--space-6); flex-wrap:wrap;
   }
-  .contact-card h2{font-family:var(--font-display); font-weight:700; font-size:clamp(26px,4vw,36px); margin:0 0 var(--space-2); color:var(--on-accent-blue);}
+  .contact-card h2{font-family:var(--font-display); font-weight:800; font-size:clamp(26px,4vw,36px); letter-spacing:-.01em; margin:0 0 var(--space-2); color:var(--on-accent-blue);}
   .contact-card p{margin:0; opacity:.85; font-size:15px;}
   .contact-actions{display:flex; gap:var(--space-4); flex-wrap:wrap;}
   .btn-mail{background:transparent; color:var(--on-accent-blue); border:1.5px solid var(--on-accent-blue);}
@@ -160,10 +171,15 @@
   [data-reveal]{opacity:0; transform:translateY(20px); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);}
   [data-reveal].is-visible{opacity:1; transform:none;}
 
+  /* Continuous scroll parallax — layered on top of transform via the standalone
+     translate property, so it never fights the reveal's transform transition. */
+  [data-parallax]{translate:0 var(--py, 0px);}
+
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .glow{animation:none !important;}
     [data-reveal]{transform:none; transition:opacity .3s ease;}
+    [data-parallax]{translate:none !important;}
   }
   @media (prefers-reduced-transparency: reduce){
     header.site{background:var(--bg-canvas); backdrop-filter:none;}
@@ -188,8 +204,8 @@
 <main id="top">
 
   <section class="hero">
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
+    <div class="glow glow-a" data-parallax="0.22"></div>
+    <div class="glow glow-b" data-parallax="-0.16"></div>
     <div class="wrap">
       <span class="eyebrow" data-reveal>tuwebuy</span>
       <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, lista para vender.</h1>
@@ -203,25 +219,25 @@
 
   <section id="sitios">
     <div class="wrap">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Trabajos</span>
         <h2 class="section-title">Sitios que ya hicimos</h2>
         <p>Entrá y recorré cada uno como lo haría un cliente tuyo.</p>
       </div>
       <div class="clients-grid">
-        <article class="client-card" data-reveal>
+        <article class="client-card" data-reveal data-parallax="0.05">
           <span class="rubro">Remates rurales</span>
           <h3>Escritorio Camy</h3>
           <p>Más de un siglo acompañando al productor rural, con remates de hacienda en vivo y buscador de lotes.</p>
           <a class="btn btn-primary" href="https://escritoriocamy.com" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal style="transition-delay:.07s">
+        <article class="client-card" data-reveal data-parallax="0.075" style="transition-delay:.07s">
           <span class="rubro">Salud</span>
           <h3>Consultorio Oftalmológico</h3>
           <p>Agenda de turnos oftalmológicos sin espera, en San José de Mayo.</p>
           <a class="btn btn-primary" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal style="transition-delay:.14s">
+        <article class="client-card" data-reveal data-parallax="0.1" style="transition-delay:.14s">
           <span class="rubro">Remates y liquidación</span>
           <h3>Siguiendo el Camino</h3>
           <p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p>
@@ -233,38 +249,38 @@
 
   <section id="incluye">
     <div class="wrap">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Qué incluye</span>
         <h2 class="section-title">Lo que lleva cada sitio</h2>
         <p>Lo mismo que ves en los tres ejemplos de arriba, adaptado a tu negocio.</p>
       </div>
       <div class="features-grid">
-        <div class="feature" data-reveal>
+        <div class="feature" data-reveal data-parallax="0.03">
           <span class="mark">1</span>
           <h4>Diseño a tu medida</h4>
           <p>Colores y tipografía pensados para tu marca, no una plantilla genérica.</p>
         </div>
-        <div class="feature" data-reveal style="transition-delay:.05s">
+        <div class="feature" data-reveal data-parallax="0.045" style="transition-delay:.05s">
           <span class="mark">2</span>
           <h4>Se ve bien en el celular</h4>
           <p>Mobile-first: la mayoría de tus clientes te va a ver desde el teléfono.</p>
         </div>
-        <div class="feature" data-reveal style="transition-delay:.1s">
+        <div class="feature" data-reveal data-parallax="0.06" style="transition-delay:.1s">
           <span class="mark">3</span>
           <h4>WhatsApp directo</h4>
           <p>Un botón que lleva directo a tu chat, sin formularios de más.</p>
         </div>
-        <div class="feature" data-reveal style="transition-delay:.15s">
+        <div class="feature" data-reveal data-parallax="0.03" style="transition-delay:.15s">
           <span class="mark">4</span>
           <h4>Buscador o agenda</h4>
           <p>Lo que tu negocio necesite: buscador de lotes, turnos, catálogo.</p>
         </div>
-        <div class="feature" data-reveal style="transition-delay:.2s">
+        <div class="feature" data-reveal data-parallax="0.045" style="transition-delay:.2s">
           <span class="mark">5</span>
           <h4>Dominio y hosting</h4>
           <p>Tu sitio online con tu propio nombre, sin que tengas que ocuparte de nada técnico.</p>
         </div>
-        <div class="feature" data-reveal style="transition-delay:.25s">
+        <div class="feature" data-reveal data-parallax="0.06" style="transition-delay:.25s">
           <span class="mark">6</span>
           <h4>Soporte después de la entrega</h4>
           <p>Si algo hay que cambiar más adelante, seguimos en contacto.</p>
@@ -275,27 +291,27 @@
 
   <section id="pasos">
     <div class="wrap">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Proceso</span>
         <h2 class="section-title">Cómo se arma tu web</h2>
       </div>
       <div class="steps-wrap">
-        <div class="step" data-reveal>
+        <div class="step" data-reveal data-parallax="0.03">
           <span class="num">1</span>
           <h3>Charlamos</h3>
           <p>Qué necesita el negocio y qué plan le queda mejor.</p>
         </div>
-        <div class="step" data-reveal style="transition-delay:.08s">
+        <div class="step" data-reveal data-parallax="0.045" style="transition-delay:.08s">
           <span class="num">2</span>
           <h3>Diseño</h3>
           <p>La propuesta visual con la paleta y las secciones de tu negocio.</p>
         </div>
-        <div class="step" data-reveal style="transition-delay:.16s">
+        <div class="step" data-reveal data-parallax="0.06" style="transition-delay:.16s">
           <span class="num">3</span>
           <h3>Desarrollo</h3>
           <p>Se construye el sitio, rápido y con movimiento.</p>
         </div>
-        <div class="step" data-reveal style="transition-delay:.24s">
+        <div class="step" data-reveal data-parallax="0.075" style="transition-delay:.24s">
           <span class="num">4</span>
           <h3>Entrega</h3>
           <p>El sitio queda online, con soporte para cambios.</p>
@@ -306,7 +322,7 @@
 
   <section id="contacto">
     <div class="wrap">
-      <div class="contact-card" data-reveal>
+      <div class="contact-card" data-reveal data-parallax="0.04">
         <div>
           <h2>¿Arrancamos tu web?</h2>
           <p>francisccamyausan@gmail.com</p>
@@ -327,9 +343,11 @@
 
 <script>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var targets = document.querySelectorAll('[data-reveal]');
+
+  // One-shot reveal: each section/card fades and settles in as it enters view.
+  var revealTargets = document.querySelectorAll('[data-reveal]');
   if (reduceMotion || !('IntersectionObserver' in window)) {
-    targets.forEach(function(el){ el.classList.add('is-visible'); });
+    revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
   } else {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
@@ -339,7 +357,43 @@
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-    targets.forEach(function(el){ io.observe(el); });
+    revealTargets.forEach(function(el){ io.observe(el); });
+  }
+
+  // Continuous parallax: everything with data-parallax drifts 1:1 with scroll
+  // position (no easing, no delay) so the whole page feels like it moves as
+  // one connected surface, not a series of separate pop-ins.
+  var parallaxTargets = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  if (!reduceMotion && parallaxTargets.length && 'IntersectionObserver' in window) {
+    var active = [];
+    var po = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var i = active.indexOf(entry.target);
+        if (entry.isIntersecting && i === -1) active.push(entry.target);
+        else if (!entry.isIntersecting && i !== -1) { active.splice(i, 1); entry.target.style.setProperty('--py', '0px'); }
+      });
+    }, { rootMargin: '20% 0px 20% 0px' });
+    parallaxTargets.forEach(function(el){ po.observe(el); });
+
+    var ticking = false;
+    function updateParallax(){
+      var vCenter = window.innerHeight / 2;
+      active.forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        var distance = (rect.top + rect.height / 2) - vCenter;
+        var factor = parseFloat(el.dataset.parallax) || 0.05;
+        var max = 36;
+        var offset = Math.max(-max, Math.min(max, distance * factor));
+        el.style.setProperty('--py', offset.toFixed(1) + 'px');
+      });
+      ticking = false;
+    }
+    function onScroll(){
+      if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateParallax();
   }
 </script>
 
