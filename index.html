@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#020143" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-canvas:#020143;
@@ -38,7 +38,7 @@
     --shadow-glow:0 0 64px rgba(214,251,0,.35);
     --font-display:'Outfit', system-ui, sans-serif;
     --font-body:'Manrope', system-ui, sans-serif;
-    --font-accent:'Space Mono', monospace;
+    --font-accent:'Playfair Display', serif;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
@@ -180,7 +180,7 @@
     font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.02em;
     margin:var(--space-4) 0 var(--space-5); max-width:15ch;
   }
-  .accent{font-family:var(--font-accent); font-style:normal; font-weight:700; color:var(--accent-lime); letter-spacing:.02em;}
+  .accent{font-family:var(--font-accent); font-style:italic; font-weight:500; color:var(--accent-lime); letter-spacing:0; text-transform:none;}
   .hero p.lead{font-size:19px; line-height:1.55; color:var(--ink-muted); max-width:520px; margin:0 0 var(--space-6);}
   .cta-row{display:flex; gap:var(--space-4); flex-wrap:wrap;}
 
