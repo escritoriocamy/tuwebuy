@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#020143" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-canvas:#020143;
@@ -38,6 +38,7 @@
     --shadow-glow:0 0 64px rgba(214,251,0,.35);
     --font-display:'Outfit', system-ui, sans-serif;
     --font-body:'Manrope', system-ui, sans-serif;
+    --font-accent:'Playfair Display', serif;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
@@ -64,11 +65,19 @@
   @media (prefers-reduced-transparency: reduce){
     body::before{display:none;}
   }
+  /* Fine dot-grid texture over the whole page — cheap way to read as more
+     "built", techy and dense instead of flat color fields. */
+  body::after{
+    content:"";
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background-image: radial-gradient(rgba(248,248,255,.07) 1px, transparent 1.5px);
+    background-size: 26px 26px;
+  }
   a{color:inherit;}
   img{max-width:100%;display:block;}
   :focus-visible{outline:2px solid var(--focus-ring); outline-offset:2px;}
 
-  .wrap{max-width:1120px; margin:0 auto; padding:0 var(--space-6);}
+  .wrap{position:relative; z-index:1; max-width:1120px; margin:0 auto; padding:0 var(--space-6);}
 
   /* Nav */
   header.site{
@@ -115,6 +124,21 @@
   .glow-b{width:320px; height:320px; background:var(--accent-blue); top:220px; left:-120px; animation-duration:22s; animation-delay:-6s;}
   @keyframes drift{0%,100%{transform:translate(0,0);} 50%{transform:translate(-32px,26px);}}
 
+  /* A glossy, slowly morphing gradient blob — the chrome/liquid centerpiece
+     that makes the hero read as more built-up and futuristic. */
+  .hero-blob{
+    position:absolute; top:50%; right:-14%; width:560px; height:560px; max-width:70vw; max-height:70vw;
+    background:conic-gradient(from 180deg, var(--accent-blue), var(--accent-lime-tint), var(--accent-lime), var(--accent-blue));
+    filter:blur(70px); opacity:.32;
+    border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;
+    animation:blob-spin 36s linear infinite, blob-morph 16s ease-in-out infinite;
+  }
+  @keyframes blob-spin{from{transform:translateY(-50%) rotate(0deg);} to{transform:translateY(-50%) rotate(360deg);}}
+  @keyframes blob-morph{
+    0%,100%{border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;}
+    50%{border-radius:58% 42% 35% 65% / 55% 55% 45% 45%;}
+  }
+
   .hero .wrap{position:relative;}
   .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h1.headline{
@@ -122,6 +146,7 @@
     font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.02em;
     margin:var(--space-4) 0 var(--space-5); max-width:15ch;
   }
+  .accent{font-family:var(--font-accent); font-style:italic; font-weight:500; letter-spacing:0; text-transform:none;}
   .hero p.lead{font-size:19px; line-height:1.55; color:var(--ink-muted); max-width:520px; margin:0 0 var(--space-6);}
   .cta-row{display:flex; gap:var(--space-4); flex-wrap:wrap;}
 
@@ -136,7 +161,10 @@
   }
 
   /* Sections */
-  section{padding:var(--space-8) 0;}
+  section{position:relative; padding:var(--space-8) 0;}
+  .section-glow{position:absolute; border-radius:50%; filter:blur(90px); opacity:.28; animation:drift 20s ease-in-out infinite; pointer-events:none; z-index:0;}
+  .section-glow-blue{background:var(--accent-blue);}
+  .section-glow-lime{background:var(--accent-lime-tint);}
   .section-head{max-width:640px; margin:0 0 var(--space-7);}
   .section-label{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h2.section-title{font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.08; letter-spacing:-.01em; margin:var(--space-3) 0 var(--space-3); color:var(--ink);}
@@ -146,9 +174,11 @@
   .clients-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5);}
   @media (max-width:860px){ .clients-grid{grid-template-columns:1fr;} }
   .client-card{
-    display:flex; flex-direction:column; background:var(--bg-surface);
+    position:relative; display:flex; flex-direction:column;
+    background:linear-gradient(160deg, rgba(248,248,255,.09), rgba(248,248,255,.02)), var(--bg-surface);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
     border-radius:var(--radius-lg); box-shadow:var(--shadow-card);
-    padding:var(--space-5); border:1px solid var(--border);
+    padding:var(--space-5); border:1px solid var(--border); border-top-color:rgba(248,248,255,.3);
   }
   .client-shot{border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--space-4); aspect-ratio:16/10; background:rgba(0,0,0,.15);}
   .client-shot img{width:100%; height:100%; object-fit:cover; object-position:top;}
@@ -160,7 +190,12 @@
   .features-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5);}
   @media (max-width:860px){ .features-grid{grid-template-columns:1fr 1fr;} }
   @media (max-width:560px){ .features-grid{grid-template-columns:1fr;} }
-  .feature{padding:var(--space-5); border:1px solid var(--border); border-radius:var(--radius-md);}
+  .feature{
+    position:relative; padding:var(--space-5); border-radius:var(--radius-md);
+    background:linear-gradient(160deg, rgba(248,248,255,.06), rgba(248,248,255,.015));
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--border); border-top-color:rgba(248,248,255,.24);
+  }
   .feature .mark{width:36px; height:36px; border-radius:var(--radius-full); background:var(--accent-lime); color:var(--on-accent-lime); font-family:var(--font-display); font-weight:700; display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4); font-size:16px;}
   .feature h4{font-family:var(--font-display); font-size:17px; margin:0 0 var(--space-2); color:var(--ink);}
   .feature p{font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0;}
@@ -210,6 +245,11 @@
   }
   @media (prefers-reduced-transparency: reduce){
     header.site{background:var(--bg-canvas); backdrop-filter:none;}
+    .client-card{background:var(--bg-surface); backdrop-filter:none;}
+    .feature{background:var(--bg-surface); backdrop-filter:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-blob, .section-glow{animation:none !important;}
   }
 </style>
 </head>
@@ -224,7 +264,7 @@
       <a href="#pasos">Cómo funciona</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="nav-cta" href="https://wa.me/59899515010" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="nav-cta" href="https://wa.me/59899515010?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tuwebuy" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
 
@@ -233,9 +273,10 @@
   <section class="hero">
     <div class="glow glow-a" data-parallax="0.22"></div>
     <div class="glow glow-b" data-parallax="-0.16"></div>
+    <div class="hero-blob" data-parallax="0.1" aria-hidden="true"></div>
     <div class="wrap">
       <span class="eyebrow" data-reveal>tuwebuy</span>
-      <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, lista para vender.</h1>
+      <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, <em class="accent">lista para vender.</em></h1>
       <p class="lead" data-reveal style="transition-delay:.1s">Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real.</p>
       <div class="cta-row" data-reveal style="transition-delay:.15s">
         <a class="btn btn-primary" href="#sitios">Ver sitios reales</a>
@@ -246,17 +287,17 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-item">Tu web a medida</span>
+      <span class="marquee-item">Tu web <em class="accent">a medida</em></span>
       <span class="marquee-dot"></span>
-      <span class="marquee-item">Diseño y creatividad</span>
+      <span class="marquee-item">Diseño <em class="accent">y creatividad</em></span>
       <span class="marquee-dot"></span>
-      <span class="marquee-item">Confianza</span>
+      <span class="marquee-item"><em class="accent">Confianza</em></span>
       <span class="marquee-dot"></span>
-      <span class="marquee-item">Tu web a medida</span>
+      <span class="marquee-item">Tu web <em class="accent">a medida</em></span>
       <span class="marquee-dot"></span>
-      <span class="marquee-item">Diseño y creatividad</span>
+      <span class="marquee-item">Diseño <em class="accent">y creatividad</em></span>
       <span class="marquee-dot"></span>
-      <span class="marquee-item">Confianza</span>
+      <span class="marquee-item"><em class="accent">Confianza</em></span>
       <span class="marquee-dot"></span>
     </div>
   </div>
@@ -265,7 +306,7 @@
     <div class="wrap">
       <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Trabajos</span>
-        <h2 class="section-title">Sitios que ya hicimos</h2>
+        <h2 class="section-title">Sitios que ya <em class="accent">hicimos</em></h2>
         <p>Entrá y recorré cada uno como lo haría un cliente tuyo.</p>
       </div>
       <div class="clients-grid">
@@ -292,10 +333,12 @@
   </section>
 
   <section id="incluye">
+    <div class="section-glow section-glow-blue" style="width:340px;height:340px;top:-60px;left:-100px;" data-parallax="0.14" aria-hidden="true"></div>
+    <div class="section-glow section-glow-lime" style="width:260px;height:260px;bottom:-40px;right:-60px;animation-duration:24s;animation-delay:-8s;" data-parallax="-0.1" aria-hidden="true"></div>
     <div class="wrap">
       <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Qué incluye</span>
-        <h2 class="section-title">Lo que lleva cada sitio</h2>
+        <h2 class="section-title">Lo que lleva <em class="accent">cada sitio</em></h2>
         <p>Lo mismo que ves en los tres ejemplos de arriba, adaptado a tu negocio.</p>
       </div>
       <div class="features-grid">
@@ -334,10 +377,12 @@
   </section>
 
   <section id="pasos">
+    <div class="section-glow section-glow-lime" style="width:300px;height:300px;top:10%;right:-80px;" data-parallax="0.12" aria-hidden="true"></div>
+    <div class="section-glow section-glow-blue" style="width:280px;height:280px;bottom:5%;left:-90px;animation-duration:26s;animation-delay:-10s;" data-parallax="-0.14" aria-hidden="true"></div>
     <div class="wrap">
       <div class="section-head" data-reveal data-parallax="0.04">
         <span class="section-label">Proceso</span>
-        <h2 class="section-title">Cómo se arma tu web</h2>
+        <h2 class="section-title">Cómo se arma <em class="accent">tu web</em></h2>
       </div>
       <div class="steps-wrap">
         <div class="step">
@@ -368,11 +413,11 @@
     <div class="wrap">
       <div class="contact-card" data-reveal data-parallax="0.04">
         <div>
-          <h2>¿Arrancamos tu web?</h2>
+          <h2>¿Arrancamos <em class="accent">tu web?</em></h2>
           <p>francisccamyausan@gmail.com</p>
         </div>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="https://wa.me/59899515010" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-primary" href="https://wa.me/59899515010?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tuwebuy" target="_blank" rel="noopener">WhatsApp</a>
           <a class="btn btn-mail" href="mailto:francisccamyausan@gmail.com">Escribir un mail</a>
         </div>
       </div>
