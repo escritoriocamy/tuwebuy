@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>tuwebuy — webs a medida, listas para vender</title>
+<meta name="description" content="tuwebuy: sitios web a medida para tu negocio. Diseño, desarrollo y entrega en días. Mirá sitios reales que ya hicimos." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-canvas:#020143;
+    --bg-surface:#00545f;
+    --ink:#f8f8ff;
+    --ink-muted:rgba(248,248,255,.64);
+    --border:rgba(248,248,255,.14);
+    --accent-lime:#d6fb00;
+    --accent-lime-tint:#ecffb6;
+    --accent-blue:#0805f1;
+    --accent-teal:#00545f;
+    --on-accent-lime:#020143;
+    --on-accent-blue:#f8f8ff;
+    --focus-ring:#d6fb00;
+    --radius-sm:8px; --radius-md:16px; --radius-lg:28px; --radius-full:999px;
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+    --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+    --shadow-card:0 12px 32px rgba(2,1,67,.28);
+    --shadow-glow:0 0 64px rgba(214,251,0,.35);
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-body:'Manrope', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-canvas);
+    color:var(--ink);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--focus-ring); outline-offset:2px;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 var(--space-6);}
+
+  /* Nav */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    background:rgba(2,1,67,.72);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:var(--space-4); padding-bottom:var(--space-4);}
+  .brand{font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-.01em; text-decoration:none;}
+  nav.links{display:flex; gap:var(--space-6); font-size:14px; font-weight:600;}
+  nav.links a{text-decoration:none; color:var(--ink-muted); transition:color .2s ease;}
+  nav.links a:hover{color:var(--ink);}
+  .nav-cta{
+    display:inline-flex; align-items:center; padding:var(--space-2) var(--space-4);
+    background:var(--accent-lime); color:var(--on-accent-lime); border-radius:var(--radius-full);
+    font-weight:700; font-size:14px; text-decoration:none;
+  }
+  @media (max-width:720px){ nav.links{display:none;} }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; gap:var(--space-2);
+    padding:var(--space-3) var(--space-5); border-radius:var(--radius-full);
+    font-family:var(--font-body); font-weight:700; font-size:15px;
+    text-decoration:none; border:none; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  .btn-primary{background:var(--accent-lime); color:var(--on-accent-lime);}
+  .btn-primary:hover{box-shadow:var(--shadow-glow); transform:scale(1.02);}
+  .btn-secondary{background:transparent; color:var(--ink); border:1.5px solid var(--border);}
+  .btn-secondary:hover{border-color:var(--ink);}
+  .btn-disabled{background:var(--accent-lime); color:var(--on-accent-lime); opacity:.45; pointer-events:none;}
+
+  /* Hero */
+  .hero{position:relative; overflow:hidden; padding:calc(var(--space-9) + var(--space-4)) 0 var(--space-9);}
+  .glow{position:absolute; border-radius:50%; filter:blur(80px); opacity:.5; animation:drift 18s ease-in-out infinite;}
+  .glow-a{width:420px; height:420px; background:var(--accent-lime-tint); top:-140px; right:-100px;}
+  .glow-b{width:320px; height:320px; background:var(--accent-blue); top:220px; left:-120px; animation-duration:22s; animation-delay:-6s;}
+  @keyframes drift{0%,100%{transform:translate(0,0);} 50%{transform:translate(-32px,26px);}}
+
+  .hero .wrap{position:relative;}
+  .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
+  h1.headline{
+    font-family:var(--font-display); font-weight:700; color:var(--ink);
+    font-size:clamp(40px, 7vw, 76px); line-height:.98; letter-spacing:-.01em;
+    margin:var(--space-4) 0 var(--space-5); max-width:15ch;
+  }
+  .hero p.lead{font-size:19px; line-height:1.55; color:var(--ink-muted); max-width:520px; margin:0 0 var(--space-6);}
+  .cta-row{display:flex; gap:var(--space-4); flex-wrap:wrap;}
+
+  /* Sections */
+  section{padding:var(--space-8) 0;}
+  .section-head{max-width:640px; margin:0 0 var(--space-7);}
+  .section-label{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
+  h2.section-title{font-family:var(--font-display); font-weight:700; font-size:clamp(28px,4vw,40px); line-height:1.08; margin:var(--space-3) 0 var(--space-3); color:var(--ink);}
+  .section-head p{color:var(--ink-muted); font-size:16px; line-height:1.6; margin:0;}
+
+  /* Client cards */
+  .clients-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5);}
+  @media (max-width:860px){ .clients-grid{grid-template-columns:1fr;} }
+  .client-card{
+    display:flex; flex-direction:column; background:var(--bg-surface);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-card);
+    padding:var(--space-5); border:1px solid var(--border);
+  }
+  .client-shot{border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--space-4); aspect-ratio:16/10; background:rgba(0,0,0,.15);}
+  .client-shot img{width:100%; height:100%; object-fit:cover; object-position:top;}
+  .rubro{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-lime);}
+  .client-card h3{font-family:var(--font-display); font-weight:700; font-size:22px; margin:var(--space-2) 0 var(--space-3); color:var(--ink);}
+  .client-card p{font-size:14px; line-height:1.55; color:var(--ink-muted); margin:0 0 var(--space-5); flex:1;}
+
+  /* Features / qué incluye */
+  .features-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5);}
+  @media (max-width:860px){ .features-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .features-grid{grid-template-columns:1fr;} }
+  .feature{padding:var(--space-5); border:1px solid var(--border); border-radius:var(--radius-md);}
+  .feature .mark{width:36px; height:36px; border-radius:var(--radius-full); background:var(--accent-lime); color:var(--on-accent-lime); font-family:var(--font-display); font-weight:700; display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4); font-size:16px;}
+  .feature h4{font-family:var(--font-display); font-size:17px; margin:0 0 var(--space-2); color:var(--ink);}
+  .feature p{font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0;}
+
+  /* Steps */
+  .steps-wrap{position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-5);}
+  @media (max-width:860px){ .steps-wrap{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps-wrap{grid-template-columns:1fr;} }
+  .step .num{width:44px; height:44px; border-radius:var(--radius-full); background:var(--accent-lime); color:var(--on-accent-lime); font-family:var(--font-display); font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);}
+  .step h3{font-family:var(--font-display); font-weight:700; font-size:19px; margin:0 0 var(--space-2); color:var(--ink);}
+  .step p{font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0;}
+
+  /* Contact */
+  .contact-card{
+    background:var(--accent-blue); color:var(--on-accent-blue);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-card);
+    padding:var(--space-8) var(--space-7);
+    display:flex; align-items:center; justify-content:space-between; gap:var(--space-6); flex-wrap:wrap;
+  }
+  .contact-card h2{font-family:var(--font-display); font-weight:700; font-size:clamp(26px,4vw,36px); margin:0 0 var(--space-2); color:var(--on-accent-blue);}
+  .contact-card p{margin:0; opacity:.85; font-size:15px;}
+  .contact-actions{display:flex; gap:var(--space-4); flex-wrap:wrap;}
+  .btn-mail{background:transparent; color:var(--on-accent-blue); border:1.5px solid var(--on-accent-blue);}
+
+  footer{padding:var(--space-6) 0 var(--space-8); color:var(--ink-muted); font-size:13px; text-align:center;}
+
+  /* Scroll reveal */
+  [data-reveal]{opacity:0; transform:translateY(24px); transition:opacity .6s ease-out, transform .6s ease-out;}
+  [data-reveal].is-visible{opacity:1; transform:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .glow{animation:none !important;}
+    [data-reveal]{transition:opacity .3s ease-out; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">tuwebuy</a>
+    <nav class="links">
+      <a href="#sitios">Sitios</a>
+      <a href="#incluye">Qué incluye</a>
+      <a href="#pasos">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/59899515010" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>tuwebuy</span>
+      <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, lista para vender.</h1>
+      <p class="lead" data-reveal style="transition-delay:.1s">Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real.</p>
+      <div class="cta-row" data-reveal style="transition-delay:.15s">
+        <a class="btn btn-primary" href="#sitios">Ver sitios reales</a>
+        <a class="btn btn-secondary" href="#contacto">Arrancar mi web</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sitios">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-label">Trabajos</span>
+        <h2 class="section-title">Sitios que ya hicimos</h2>
+        <p>Entrá y recorré cada uno como lo haría un cliente tuyo.</p>
+      </div>
+      <div class="clients-grid">
+        <article class="client-card" data-reveal>
+          <span class="rubro">Remates rurales</span>
+          <h3>Escritorio Camy</h3>
+          <p>Más de un siglo acompañando al productor rural, con remates de hacienda en vivo y buscador de lotes.</p>
+          <a class="btn btn-primary" href="https://escritoriocamy.com" target="_blank" rel="noopener">Ver sitio →</a>
+        </article>
+        <article class="client-card" data-reveal style="transition-delay:.1s">
+          <span class="rubro">Salud</span>
+          <h3>Consultorio Oftalmológico</h3>
+          <p>Agenda de turnos oftalmológicos sin espera, en San José de Mayo.</p>
+          <a class="btn btn-primary" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener">Ver sitio →</a>
+        </article>
+        <article class="client-card" data-reveal style="transition-delay:.2s">
+          <span class="rubro">Remates y liquidación</span>
+          <h3>Siguiendo el Camino</h3>
+          <p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p>
+          <span class="btn btn-disabled">Próximamente</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="incluye">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-label">Qué incluye</span>
+        <h2 class="section-title">Lo que lleva cada sitio</h2>
+        <p>Lo mismo que ves en los tres ejemplos de arriba, adaptado a tu negocio.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature" data-reveal>
+          <span class="mark">1</span>
+          <h4>Diseño a tu medida</h4>
+          <p>Colores y tipografía pensados para tu marca, no una plantilla genérica.</p>
+        </div>
+        <div class="feature" data-reveal style="transition-delay:.05s">
+          <span class="mark">2</span>
+          <h4>Se ve bien en el celular</h4>
+          <p>Mobile-first: la mayoría de tus clientes te va a ver desde el teléfono.</p>
+        </div>
+        <div class="feature" data-reveal style="transition-delay:.1s">
+          <span class="mark">3</span>
+          <h4>WhatsApp directo</h4>
+          <p>Un botón que lleva directo a tu chat, sin formularios de más.</p>
+        </div>
+        <div class="feature" data-reveal style="transition-delay:.15s">
+          <span class="mark">4</span>
+          <h4>Buscador o agenda</h4>
+          <p>Lo que tu negocio necesite: buscador de lotes, turnos, catálogo.</p>
+        </div>
+        <div class="feature" data-reveal style="transition-delay:.2s">
+          <span class="mark">5</span>
+          <h4>Dominio y hosting</h4>
+          <p>Tu sitio online con tu propio nombre, sin que tengas que ocuparte de nada técnico.</p>
+        </div>
+        <div class="feature" data-reveal style="transition-delay:.25s">
+          <span class="mark">6</span>
+          <h4>Soporte después de la entrega</h4>
+          <p>Si algo hay que cambiar más adelante, seguimos en contacto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pasos">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-label">Proceso</span>
+        <h2 class="section-title">Cómo se arma tu web</h2>
+      </div>
+      <div class="steps-wrap">
+        <div class="step" data-reveal>
+          <span class="num">1</span>
+          <h3>Charlamos</h3>
+          <p>Qué necesita el negocio y qué plan le queda mejor.</p>
+        </div>
+        <div class="step" data-reveal style="transition-delay:.08s">
+          <span class="num">2</span>
+          <h3>Diseño</h3>
+          <p>La propuesta visual con la paleta y las secciones de tu negocio.</p>
+        </div>
+        <div class="step" data-reveal style="transition-delay:.16s">
+          <span class="num">3</span>
+          <h3>Desarrollo</h3>
+          <p>Se construye el sitio, rápido y con movimiento.</p>
+        </div>
+        <div class="step" data-reveal style="transition-delay:.24s">
+          <span class="num">4</span>
+          <h3>Entrega</h3>
+          <p>El sitio queda online, con soporte para cambios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact-card" data-reveal>
+        <div>
+          <h2>¿Arrancamos tu web?</h2>
+          <p>francisccamyausan@gmail.com</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="https://wa.me/59899515010" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-mail" href="mailto:francisccamyausan@gmail.com">Escribir un mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">tuwebuy — webs a medida.</div>
+</footer>
+
+<script>
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var targets = document.querySelectorAll('[data-reveal]');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    targets.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    targets.forEach(function(el){ io.observe(el); });
+  }
+</script>
+
+</body>
+</html>
