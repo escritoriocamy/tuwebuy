@@ -191,8 +191,9 @@
 
   footer{padding:var(--space-6) 0 var(--space-8); color:var(--ink-muted); font-size:13px; text-align:center;}
 
-  /* Scroll reveal */
-  [data-reveal]{opacity:0; transform:translateY(20px); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);}
+  /* Scroll reveal — slides in from the left, and back out, every time it
+     crosses in or out of view (not just once). */
+  [data-reveal]{opacity:0; transform:translateX(-56px); transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);}
   [data-reveal].is-visible{opacity:1; transform:none;}
 
   /* Continuous scroll parallax — layered on top of transform via the standalone
@@ -387,17 +388,15 @@
 <script>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // One-shot reveal: each section/card fades and settles in as it enters view.
+  // Reveal: each section/card slides in from the left as it enters view,
+  // and slides back out (and fades) every time it leaves — not just once.
   var revealTargets = document.querySelectorAll('[data-reveal]');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
   } else {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
     revealTargets.forEach(function(el){ io.observe(el); });
