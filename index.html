@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>tuwebuy — webs a medida, listas para vender</title>
 <meta name="description" content="tuwebuy: sitios web a medida para tu negocio. Diseño, desarrollo y entrega en días. Mirá sitios reales que ya hicimos." />
+<link rel="canonical" href="https://tuwebuy.online/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="tuwebuy" />
+<meta property="og:title" content="tuwebuy — webs a medida, listas para vender" />
+<meta property="og:description" content="Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real." />
+<meta property="og:url" content="https://tuwebuy.online/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="tuwebuy — webs a medida, listas para vender" />
+<meta name="twitter:description" content="Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real." />
+<meta name="theme-color" content="#020143" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -115,6 +125,16 @@
   .hero p.lead{font-size:19px; line-height:1.55; color:var(--ink-muted); max-width:520px; margin:0 0 var(--space-6);}
   .cta-row{display:flex; gap:var(--space-4); flex-wrap:wrap;}
 
+  /* Marquee ribbon */
+  .marquee{overflow:hidden; background:var(--bg-surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .marquee-track{display:flex; align-items:center; width:max-content; gap:var(--space-6); padding:var(--space-4) 0; animation:marquee 24s linear infinite;}
+  .marquee-item{font-family:var(--font-display); font-weight:800; font-size:clamp(18px,2.6vw,30px); text-transform:uppercase; letter-spacing:-.01em; color:var(--ink); white-space:nowrap;}
+  .marquee-dot{width:11px; height:11px; border-radius:50%; background:var(--accent-lime); flex:none; box-shadow:0 0 18px rgba(214,251,0,.65);}
+  @keyframes marquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  @media (hover:hover) and (pointer:fine){
+    .marquee:hover .marquee-track{animation-play-state:paused;}
+  }
+
   /* Sections */
   section{padding:var(--space-8) 0;}
   .section-head{max-width:640px; margin:0 0 var(--space-7);}
@@ -145,13 +165,17 @@
   .feature h4{font-family:var(--font-display); font-size:17px; margin:0 0 var(--space-2); color:var(--ink);}
   .feature p{font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0;}
 
-  /* Steps */
-  .steps-wrap{position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-5);}
-  @media (max-width:860px){ .steps-wrap{grid-template-columns:1fr 1fr;} }
-  @media (max-width:560px){ .steps-wrap{grid-template-columns:1fr;} }
-  .step .num{width:44px; height:44px; border-radius:var(--radius-full); background:var(--accent-lime); color:var(--on-accent-lime); font-family:var(--font-display); font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4);}
-  .step h3{font-family:var(--font-display); font-weight:700; font-size:19px; margin:0 0 var(--space-2); color:var(--ink);}
-  .step p{font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0;}
+  /* Steps — vertical sequence: the step nearest the middle of the screen
+     grows, the rest sit small and dimmed, so only one is "it" at a time. */
+  .steps-wrap{display:flex; flex-direction:column; gap:14vh; max-width:600px; margin:0 auto; padding:8vh 0;}
+  .step{
+    text-align:center; transform:scale(.86); opacity:.4;
+    transition:transform .5s var(--ease-out), opacity .5s var(--ease-out);
+  }
+  .step.is-active{transform:scale(1.1); opacity:1;}
+  .step .num{width:52px; height:52px; border-radius:var(--radius-full); background:var(--accent-lime); color:var(--on-accent-lime); font-family:var(--font-display); font-weight:800; font-size:19px; display:flex; align-items:center; justify-content:center; margin:0 auto var(--space-4);}
+  .step h3{font-family:var(--font-display); font-weight:800; font-size:26px; margin:0 0 var(--space-2); color:var(--ink);}
+  .step p{font-size:15px; line-height:1.6; color:var(--ink-muted); margin:0 auto; max-width:42ch;}
 
   /* Contact */
   .contact-card{
@@ -180,6 +204,8 @@
     .glow{animation:none !important;}
     [data-reveal]{transform:none; transition:opacity .3s ease;}
     [data-parallax]{translate:none !important;}
+    .marquee-track{animation:none;}
+    .step{transform:none; opacity:1; transition:none;}
   }
   @media (prefers-reduced-transparency: reduce){
     header.site{background:var(--bg-canvas); backdrop-filter:none;}
@@ -216,6 +242,23 @@
       </div>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Tu web a medida</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Diseño y creatividad</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Confianza</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Tu web a medida</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Diseño y creatividad</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Confianza</span>
+      <span class="marquee-dot"></span>
+    </div>
+  </div>
 
   <section id="sitios">
     <div class="wrap">
@@ -296,22 +339,22 @@
         <h2 class="section-title">Cómo se arma tu web</h2>
       </div>
       <div class="steps-wrap">
-        <div class="step" data-reveal data-parallax="0.03">
+        <div class="step">
           <span class="num">1</span>
           <h3>Charlamos</h3>
           <p>Qué necesita el negocio y qué plan le queda mejor.</p>
         </div>
-        <div class="step" data-reveal data-parallax="0.045" style="transition-delay:.08s">
+        <div class="step">
           <span class="num">2</span>
           <h3>Diseño</h3>
           <p>La propuesta visual con la paleta y las secciones de tu negocio.</p>
         </div>
-        <div class="step" data-reveal data-parallax="0.06" style="transition-delay:.16s">
+        <div class="step">
           <span class="num">3</span>
           <h3>Desarrollo</h3>
           <p>Se construye el sitio, rápido y con movimiento.</p>
         </div>
-        <div class="step" data-reveal data-parallax="0.075" style="transition-delay:.24s">
+        <div class="step">
           <span class="num">4</span>
           <h3>Entrega</h3>
           <p>El sitio queda online, con soporte para cambios.</p>
@@ -394,6 +437,32 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     updateParallax();
+  }
+
+  // Steps: whichever step sits closest to the middle of the screen grows;
+  // every other one shrinks back down — so as you scroll, one at a time
+  // takes the spotlight.
+  var stepEls = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  if (!reduceMotion && stepEls.length) {
+    var stepTicking = false;
+    function updateActiveStep(){
+      var vCenter = window.innerHeight / 2;
+      var closest = null, closestDist = Infinity;
+      stepEls.forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var dist = Math.abs(center - vCenter);
+        if (dist < closestDist) { closestDist = dist; closest = el; }
+      });
+      stepEls.forEach(function(el){ el.classList.toggle('is-active', el === closest); });
+      stepTicking = false;
+    }
+    function onStepScroll(){
+      if (!stepTicking) { requestAnimationFrame(updateActiveStep); stepTicking = true; }
+    }
+    window.addEventListener('scroll', onStepScroll, { passive: true });
+    window.addEventListener('resize', onStepScroll);
+    updateActiveStep();
   }
 </script>
 
