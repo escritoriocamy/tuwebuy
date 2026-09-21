@@ -14,28 +14,28 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="tuwebuy — webs a medida, listas para vender" />
 <meta name="twitter:description" content="Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real." />
-<meta name="theme-color" content="#020143" />
+<meta name="theme-color" content="#0B2347" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-canvas:#020143;
-    --bg-surface:#070f4a;
-    --ink:#f8f8ff;
-    --ink-muted:rgba(248,248,255,.64);
-    --border:rgba(248,248,255,.16);
-    --accent-lime:#d6fb00;
-    --accent-lime-tint:#ecffb6;
-    --accent-blue:#0805f1;
-    --on-accent-lime:#020143;
-    --on-accent-blue:#f8f8ff;
-    --focus-ring:#d6fb00;
+    --bg-canvas:#0B2347;
+    --bg-surface:#123a6b;
+    --ink:#f5f9ff;
+    --ink-muted:rgba(245,249,255,.64);
+    --border:rgba(245,249,255,.16);
+    --accent-lime:#C6FF1E;
+    --accent-lime-tint:#14B8A6;
+    --accent-blue:#2563EB;
+    --on-accent-lime:#0B2347;
+    --on-accent-blue:#f5f9ff;
+    --focus-ring:#6EDB3A;
     --radius-sm:8px; --radius-md:16px; --radius-lg:28px; --radius-full:999px;
     --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
     --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
-    --shadow-card:0 12px 32px rgba(2,1,67,.28);
-    --shadow-glow:0 0 64px rgba(214,251,0,.35);
+    --shadow-card:0 12px 32px rgba(11,35,71,.35);
+    --shadow-glow:0 0 64px rgba(198,255,30,.4);
     --font-display:'Outfit', system-ui, sans-serif;
     --font-body:'Manrope', system-ui, sans-serif;
     --font-accent:'Playfair Display', serif;
@@ -53,25 +53,31 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  /* Ambient wash that runs behind the whole page — navy to blue to lime,
-     echoing the brand's gradient reference — instead of flat color blocks. */
-  body::before{
-    content:"";
-    position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background:
-      radial-gradient(ellipse 60% 46% at 12% 88%, rgba(8,5,241,.4), transparent 62%),
-      radial-gradient(ellipse 52% 40% at 90% 8%, rgba(214,251,0,.16), transparent 60%);
-  }
-  @media (prefers-reduced-transparency: reduce){
-    body::before{display:none;}
-  }
   /* Fine dot-grid texture over the whole page — cheap way to read as more
      "built", techy and dense instead of flat color fields. */
   body::after{
     content:"";
-    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    position:fixed; inset:0; z-index:-2; pointer-events:none;
     background-image: radial-gradient(rgba(248,248,255,.07) 1px, transparent 1.5px);
     background-size: 26px 26px;
+  }
+
+  /* Aurora backdrop — a big, slow field of color behind the whole page (not
+     just the hero), matching the brand's gradient reference: mostly dark
+     navy, lime doing most of the work, blue kept light. Real DOM (not a
+     pseudo-element) so it can also nudge with scroll via data-parallax. */
+  .aurora{position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;}
+  .aurora-blob{position:absolute; border-radius:50%; filter:blur(120px); mix-blend-mode:screen; will-change:transform;}
+  .aurora-blue{width:52vw; height:52vw; max-width:560px; max-height:560px; top:-18%; right:-8%; background:var(--accent-blue); opacity:.14; animation:aurora-a 24s ease-in-out infinite;}
+  .aurora-teal{width:48vw; height:48vw; max-width:520px; max-height:520px; top:14%; right:6%; background:var(--accent-lime-tint); opacity:.2; animation:aurora-b 20s ease-in-out infinite;}
+  .aurora-lime{width:66vw; height:66vw; max-width:720px; max-height:720px; bottom:-28%; left:-16%; background:var(--accent-lime); opacity:.24; animation:aurora-c 28s ease-in-out infinite;}
+  .aurora-lime2{width:44vw; height:44vw; max-width:480px; max-height:480px; bottom:-8%; left:24%; background:var(--accent-lime); opacity:.15; animation:aurora-d 18s ease-in-out infinite;}
+  @keyframes aurora-a{0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-6%,6%) scale(1.08);} 66%{transform:translate(4%,-4%) scale(.95);}}
+  @keyframes aurora-b{0%,100%{transform:translate(0,0) scale(1);} 40%{transform:translate(6%,-7%) scale(1.1);} 75%{transform:translate(-5%,5%) scale(.93);}}
+  @keyframes aurora-c{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(7%,-6%) scale(1.06);}}
+  @keyframes aurora-d{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-6%,7%) scale(1.12);}}
+  @media (prefers-reduced-transparency: reduce){
+    .aurora{display:none;}
   }
   a{color:inherit;}
   img{max-width:100%;display:block;}
@@ -82,7 +88,7 @@
   /* Nav */
   header.site{
     position:sticky; top:0; z-index:40;
-    background:rgba(2,1,67,.72);
+    background:rgba(11,35,71,.72);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
   }
@@ -120,26 +126,6 @@
 
   /* Hero */
   .hero{position:relative; overflow:hidden; padding:calc(var(--space-9) + var(--space-4)) 0 var(--space-9);}
-  .glow{position:absolute; border-radius:50%; filter:blur(80px); opacity:.5; animation:drift 18s ease-in-out infinite;}
-  .glow-a{width:420px; height:420px; background:var(--accent-lime-tint); top:-140px; right:-100px;}
-  .glow-b{width:320px; height:320px; background:var(--accent-blue); top:220px; left:-120px; animation-duration:22s; animation-delay:-6s;}
-  @keyframes drift{0%,100%{transform:translate(0,0);} 50%{transform:translate(-32px,26px);}}
-
-  /* A glossy, slowly morphing gradient blob — the chrome/liquid centerpiece
-     that makes the hero read as more built-up and futuristic. */
-  .hero-blob{
-    position:absolute; top:50%; right:-14%; width:560px; height:560px; max-width:70vw; max-height:70vw;
-    background:conic-gradient(from 180deg, var(--accent-blue), var(--accent-lime-tint), var(--accent-lime), var(--accent-blue));
-    filter:blur(70px); opacity:.32;
-    border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;
-    animation:blob-spin 36s linear infinite, blob-morph 16s ease-in-out infinite;
-  }
-  @keyframes blob-spin{from{transform:translateY(-50%) rotate(0deg);} to{transform:translateY(-50%) rotate(360deg);}}
-  @keyframes blob-morph{
-    0%,100%{border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;}
-    50%{border-radius:58% 42% 35% 65% / 55% 55% 45% 45%;}
-  }
-
   .hero .wrap{position:relative;}
   .eyebrow{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h1.headline{
@@ -155,7 +141,7 @@
   .marquee{overflow:hidden; background:var(--bg-surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .marquee-track{display:flex; align-items:center; width:max-content; gap:var(--space-6); padding:var(--space-4) 0; animation:marquee 24s linear infinite;}
   .marquee-item{font-family:var(--font-display); font-weight:800; font-size:clamp(18px,2.6vw,30px); text-transform:uppercase; letter-spacing:-.01em; color:var(--ink); white-space:nowrap;}
-  .marquee-dot{width:11px; height:11px; border-radius:50%; background:var(--accent-lime); flex:none; box-shadow:0 0 18px rgba(214,251,0,.65);}
+  .marquee-dot{width:11px; height:11px; border-radius:50%; background:var(--accent-lime); flex:none; box-shadow:0 0 18px rgba(198,255,30,.65);}
   @keyframes marquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
   @media (hover:hover) and (pointer:fine){
     .marquee:hover .marquee-track{animation-play-state:paused;}
@@ -163,9 +149,6 @@
 
   /* Sections */
   section{position:relative; padding:var(--space-8) 0;}
-  .section-glow{position:absolute; border-radius:50%; filter:blur(90px); opacity:.28; animation:drift 20s ease-in-out infinite; pointer-events:none; z-index:0;}
-  .section-glow-blue{background:var(--accent-blue);}
-  .section-glow-lime{background:var(--accent-lime-tint);}
   .section-head{max-width:640px; margin:0 0 var(--space-7);}
   .section-label{font-family:var(--font-body); font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lime);}
   h2.section-title{font-family:var(--font-display); font-weight:800; font-size:clamp(28px,4vw,40px); line-height:1.08; letter-spacing:-.01em; margin:var(--space-3) 0 var(--space-3); color:var(--ink);}
@@ -238,7 +221,7 @@
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .glow{animation:none !important;}
+    .aurora-blob{animation:none !important;}
     [data-reveal]{transform:none; transition:opacity .3s ease;}
     [data-parallax]{translate:none !important;}
     .marquee-track{animation:none;}
@@ -249,12 +232,16 @@
     .client-card{background:var(--bg-surface); backdrop-filter:none;}
     .feature{background:var(--bg-surface); backdrop-filter:none;}
   }
-  @media (prefers-reduced-motion: reduce){
-    .hero-blob, .section-glow{animation:none !important;}
-  }
 </style>
 </head>
 <body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="aurora-blob aurora-blue" data-parallax="0.08"></div>
+  <div class="aurora-blob aurora-teal" data-parallax="-0.06"></div>
+  <div class="aurora-blob aurora-lime" data-parallax="0.1"></div>
+  <div class="aurora-blob aurora-lime2" data-parallax="-0.08"></div>
+</div>
 
 <header class="site">
   <div class="wrap">
@@ -272,16 +259,13 @@
 <main id="top">
 
   <section class="hero">
-    <div class="glow glow-a" data-parallax="0.22"></div>
-    <div class="glow glow-b" data-parallax="-0.16"></div>
-    <div class="hero-blob" data-parallax="0.1" aria-hidden="true"></div>
     <div class="wrap">
-      <span class="eyebrow" data-reveal>tuwebuy</span>
-      <h1 class="headline" data-reveal style="transition-delay:.05s">Tu web, <em class="accent">lista para vender.</em></h1>
-      <p class="lead" data-reveal style="transition-delay:.1s">Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real.</p>
-      <div class="cta-row" data-reveal style="transition-delay:.15s">
+      <span class="eyebrow" data-reveal data-parallax="0.05">tuwebuy</span>
+      <h1 class="headline" data-reveal data-parallax="0.08" style="transition-delay:.05s">Tu web, <em class="accent">lista para vender.</em></h1>
+      <p class="lead" data-reveal data-parallax="0.06" style="transition-delay:.1s">Sitios rápidos, a medida y con movimiento, para que tu negocio se vea tan bien online como en la vida real.</p>
+      <div class="cta-row" data-reveal data-parallax="0.05" style="transition-delay:.15s">
         <a class="btn btn-primary" href="#sitios">Ver sitios reales</a>
-        <a class="btn btn-secondary" href="#contacto">Arrancar mi web</a>
+        <a class="btn btn-secondary" href="#contacto">Empezar mi web</a>
       </div>
     </div>
   </section>
@@ -305,25 +289,25 @@
 
   <section id="sitios">
     <div class="wrap">
-      <div class="section-head" data-reveal data-parallax="0.04">
+      <div class="section-head" data-reveal data-parallax="0.07">
         <span class="section-label">Trabajos</span>
         <h2 class="section-title">Sitios que ya <em class="accent">hicimos</em></h2>
         <p>Entrá y recorré cada uno como lo haría un cliente tuyo.</p>
       </div>
       <div class="clients-grid">
-        <article class="client-card" data-reveal data-parallax="0.05">
+        <article class="client-card" data-reveal data-parallax="0.08">
           <span class="rubro">Remates rurales</span>
           <h3>Escritorio Camy</h3>
           <p>Más de un siglo acompañando al productor rural, con remates de hacienda en vivo y buscador de lotes.</p>
           <a class="btn btn-primary" href="https://escritoriocamy.com.uy/index.html" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal data-parallax="0.075" style="transition-delay:.07s">
+        <article class="client-card" data-reveal data-parallax="0.12" style="transition-delay:.07s">
           <span class="rubro">Salud</span>
           <h3>Consultorio Oftalmológico</h3>
           <p>Agenda de turnos oftalmológicos sin espera, en San José de Mayo.</p>
           <a class="btn btn-primary" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
-        <article class="client-card" data-reveal data-parallax="0.1" style="transition-delay:.14s">
+        <article class="client-card" data-reveal data-parallax="0.16" style="transition-delay:.14s">
           <span class="rubro">Remates y liquidación</span>
           <h3>Siguiendo el Camino</h3>
           <p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p>
@@ -334,56 +318,54 @@
   </section>
 
   <section id="incluye">
-    <div class="section-glow section-glow-blue" style="width:340px;height:340px;top:-60px;left:-100px;" data-parallax="0.14" aria-hidden="true"></div>
-    <div class="section-glow section-glow-lime" style="width:260px;height:260px;bottom:-40px;right:-60px;animation-duration:24s;animation-delay:-8s;" data-parallax="-0.1" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="section-head" data-reveal data-parallax="0.04">
+      <div class="section-head" data-reveal data-parallax="0.07">
         <span class="section-label">Qué incluye</span>
         <h2 class="section-title">Lo que lleva <em class="accent">cada sitio</em></h2>
         <p>Lo mismo que ves en los tres ejemplos de arriba, adaptado a tu negocio.</p>
       </div>
       <div class="features-grid">
-        <div class="feature" data-reveal data-parallax="0.03">
+        <div class="feature" data-reveal data-parallax="0.05">
           <span class="mark">1</span>
           <h4>Diseño a tu medida</h4>
           <p>Colores y tipografía pensados para tu marca, no una plantilla genérica.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.045" style="transition-delay:.04s">
+        <div class="feature" data-reveal data-parallax="0.075" style="transition-delay:.04s">
           <span class="mark">2</span>
           <h4>Se ve bien en el celular</h4>
           <p>Mobile-first: la mayoría de tus clientes te va a ver desde el teléfono.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.06" style="transition-delay:.08s">
+        <div class="feature" data-reveal data-parallax="0.1" style="transition-delay:.08s">
           <span class="mark">3</span>
           <h4>WhatsApp directo</h4>
           <p>Un botón que lleva directo a tu chat, sin formularios de más.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.03" style="transition-delay:.12s">
+        <div class="feature" data-reveal data-parallax="0.05" style="transition-delay:.12s">
           <span class="mark">4</span>
           <h4>Sistema de reservas online</h4>
           <p>Calendario en tiempo real, para que el cliente reserve o pida turno solo, sin llamar.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.045" style="transition-delay:.16s">
+        <div class="feature" data-reveal data-parallax="0.075" style="transition-delay:.16s">
           <span class="mark">5</span>
           <h4>Panel de administración</h4>
           <p>Un acceso privado tuyo, separado de la web pública, para ver y gestionar reservas, pagos y contactos.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.06" style="transition-delay:.2s">
+        <div class="feature" data-reveal data-parallax="0.1" style="transition-delay:.2s">
           <span class="mark">6</span>
           <h4>Precios y servicios claros</h4>
           <p>Si tu negocio maneja varias tarifas o convenios, el cliente ve el precio actualizado al momento.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.03" style="transition-delay:.24s">
+        <div class="feature" data-reveal data-parallax="0.05" style="transition-delay:.24s">
           <span class="mark">7</span>
           <h4>Dominio y hosting propios</h4>
           <p>Tu sitio online con tu propio nombre, sin depender de servidores de terceros.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.045" style="transition-delay:.28s">
+        <div class="feature" data-reveal data-parallax="0.075" style="transition-delay:.28s">
           <span class="mark">8</span>
           <h4>Posicionamiento en Google</h4>
           <p>Configuro las herramientas para que tu negocio aparezca cuando te busquen.</p>
         </div>
-        <div class="feature" data-reveal data-parallax="0.06" style="transition-delay:.32s">
+        <div class="feature" data-reveal data-parallax="0.1" style="transition-delay:.32s">
           <span class="mark">9</span>
           <h4>Soporte después de la entrega</h4>
           <p>Si algo hay que cambiar más adelante, seguimos en contacto.</p>
@@ -393,10 +375,8 @@
   </section>
 
   <section id="pasos">
-    <div class="section-glow section-glow-lime" style="width:300px;height:300px;top:10%;right:-80px;" data-parallax="0.12" aria-hidden="true"></div>
-    <div class="section-glow section-glow-blue" style="width:280px;height:280px;bottom:5%;left:-90px;animation-duration:26s;animation-delay:-10s;" data-parallax="-0.14" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="section-head" data-reveal data-parallax="0.04">
+      <div class="section-head" data-reveal data-parallax="0.07">
         <span class="section-label">Proceso</span>
         <h2 class="section-title">Cómo se arma <em class="accent">tu web</em></h2>
       </div>
@@ -427,7 +407,7 @@
 
   <section id="contacto">
     <div class="wrap">
-      <div class="contact-card" data-reveal data-parallax="0.04">
+      <div class="contact-card" data-reveal data-parallax="0.07">
         <div>
           <h2>¿Arrancamos <em class="accent">tu web?</em></h2>
           <p>franciscocamyausan@gmail.com</p>
@@ -485,7 +465,7 @@
         var rect = el.getBoundingClientRect();
         var distance = (rect.top + rect.height / 2) - vCenter;
         var factor = parseFloat(el.dataset.parallax) || 0.05;
-        var max = 36;
+        var max = 64;
         var offset = Math.max(-max, Math.min(max, distance * factor));
         el.style.setProperty('--py', offset.toFixed(1) + 'px');
       });
