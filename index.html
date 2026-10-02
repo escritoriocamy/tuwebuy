@@ -155,7 +155,7 @@
   .section-head p{color:var(--ink-muted); font-size:16px; line-height:1.6; margin:0;}
 
   /* Client cards */
-  .clients-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-5);}
+  .clients-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-5);}
   @media (max-width:860px){ .clients-grid{grid-template-columns:1fr;} }
   .client-card{
     position:relative; display:flex; flex-direction:column;
@@ -312,6 +312,12 @@
           <h3>Siguiendo el Camino</h3>
           <p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p>
           <a class="btn btn-primary" href="https://siguiendoelcamino.com" target="_blank" rel="noopener">Ver sitio →</a>
+        </article>
+        <article class="client-card" data-reveal data-parallax="0.1" style="transition-delay:.21s">
+          <span class="rubro">App familiar</span>
+          <h3>Viajes Camy</h3>
+          <p>Plataforma para coordinar viajes compartidos entre familiares en la ruta San José – Montevideo, con sistema de puntos.</p>
+          <a class="btn btn-primary" href="https://viajes-camy.vercel.app/" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
       </div>
     </div>
