@@ -155,8 +155,9 @@
   .section-head p{color:var(--ink-muted); font-size:16px; line-height:1.6; margin:0;}
 
   /* Client cards */
-  .clients-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-5);}
-  @media (max-width:860px){ .clients-grid{grid-template-columns:1fr;} }
+  .clients-grid{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-5);}
+  .clients-grid .client-card{flex:0 1 calc((100% - 2 * var(--space-5)) / 3);}
+  @media (max-width:860px){ .clients-grid .client-card{flex-basis:100%;} }
   .client-card{
     position:relative; display:flex; flex-direction:column;
     background:linear-gradient(160deg, rgba(248,248,255,.09), rgba(248,248,255,.02)), var(--bg-surface);
@@ -318,6 +319,12 @@
           <h3>Viajes Camy</h3>
           <p>Plataforma para coordinar viajes compartidos entre familiares en la ruta San José – Montevideo, con sistema de puntos.</p>
           <a class="btn btn-primary" href="https://viajes-camy.vercel.app/" target="_blank" rel="noopener">Ver sitio →</a>
+        </article>
+        <article class="client-card" data-reveal data-parallax="0.14" style="transition-delay:.28s">
+          <span class="rubro">Gastronomía</span>
+          <h3>El Barto</h3>
+          <p>Pizzas a la piedra y smash burgers en Colonia Valdense, con pedidos online que se confirman por WhatsApp.</p>
+          <a class="btn btn-primary" href="https://elbarto.com.uy" target="_blank" rel="noopener">Ver sitio →</a>
         </article>
       </div>
     </div>
