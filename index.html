@@ -2,7 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/png" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="tuwebuy" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>tuwebuy — webs a medida, listas para vender</title>
 <meta name="description" content="tuwebuy: sitios web a medida para tu negocio. Diseño, desarrollo y entrega en días. Mirá sitios reales que ya hicimos." />
 <link rel="canonical" href="https://tuwebuy.online/" />
@@ -93,6 +100,7 @@
     background:rgba(11,35,71,.72);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
+    padding-top:env(safe-area-inset-top);
   }
   header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:var(--space-4); padding-bottom:var(--space-4);}
   .brand{display:inline-flex; align-items:center; gap:var(--space-2); font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-.01em; color:var(--ink); text-decoration:none;}
@@ -299,7 +307,16 @@
   .contact-actions{display:flex; gap:var(--space-4); flex-wrap:wrap;}
   .btn-mail{background:transparent; color:var(--on-accent-blue); border:1.5px solid var(--on-accent-blue);}
 
-  footer{padding:var(--space-6) 0 var(--space-8); color:var(--ink-muted); font-size:13px; text-align:center;}
+  footer{padding:var(--space-6) 0 calc(var(--space-8) + env(safe-area-inset-bottom)); color:var(--ink-muted); font-size:13px; text-align:center;}
+  .install-btn{
+    display:inline-flex; align-items:center; gap:var(--space-2); margin-top:var(--space-4);
+    padding:var(--space-2) var(--space-5); border-radius:var(--radius-full); cursor:pointer;
+    font-family:var(--font-body); font-weight:700; font-size:14px;
+    background:transparent; color:var(--ink); border:1.5px solid var(--border);
+  }
+  .install-hint{margin:var(--space-3) auto 0; max-width:34ch; font-size:13px; color:var(--ink-muted);}
+  @media (display-mode: standalone){ .install-btn, .install-hint{display:none !important;} }
+  @media (hover:hover) and (pointer:fine){ .install-btn:hover{border-color:var(--ink);} }
 
   /* Scroll reveal — slides in from the left, and back out, every time it
      crosses in or out of view (not just once). */
@@ -589,7 +606,11 @@
 </main>
 
 <footer>
-  <div class="wrap">tuwebuy — webs a medida.</div>
+  <div class="wrap">
+    tuwebuy — webs a medida.
+    <div><button type="button" class="install-btn" id="install-btn" hidden>Instalar app</button></div>
+    <p class="install-hint" id="install-hint" hidden>En iPhone: tocá el botón Compartir y elegí "Agregar a pantalla de inicio".</p>
+  </div>
 </footer>
 
 <script>
@@ -644,6 +665,32 @@
     window.addEventListener('resize', onScroll);
     updateParallax();
   }
+
+  // App install: register the service worker, offer "Instalar app" where the
+  // browser allows it (Android/Chrome), and show the manual steps on iPhone.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+  var installBtn = document.getElementById('install-btn');
+  var installHint = document.getElementById('install-hint');
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  var deferredInstall = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredInstall = e;
+    if (!isStandalone) installBtn.hidden = false;
+  });
+  installBtn.addEventListener('click', function(){
+    if (deferredInstall) {
+      deferredInstall.prompt();
+      deferredInstall.userChoice.then(function(){ deferredInstall = null; installBtn.hidden = true; });
+    } else {
+      installHint.hidden = false;
+    }
+  });
+  window.addEventListener('appinstalled', function(){ installBtn.hidden = true; });
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (isIOS && !isStandalone) installBtn.hidden = false;
 
   // Steps: whichever step sits closest to the middle of the screen grows;
   // every other one shrinks back down — so as you scroll, one at a time
