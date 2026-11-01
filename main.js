@@ -393,7 +393,11 @@
 
   /* ---------- cierre ---------- */
   gsap.from('#fh .g', { yPercent: 70, opacity: 0, stagger: .14, duration: 1, ease: 'power4.out', scrollTrigger: { trigger: '#fh', start: 'top 85%', toggleActions: 'play reverse play reverse' } });
-  gsap.fromTo('#bigword', { yPercent: 35 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  // palabra gigante del pie: cada letra sube una por una al llegar al final
+  var bw = $('#bigword'), word = bw.textContent; bw.setAttribute('aria-label', word); bw.textContent = '';
+  var letters = word.split('').map(function (ch) { var s = document.createElement('span'); s.className = 'bl'; s.setAttribute('aria-hidden', 'true'); s.textContent = ch; bw.appendChild(s); return s; });
+  gsap.set(letters, { yPercent: 70, opacity: 0 });
+  gsap.to(letters, { yPercent: 0, opacity: 1, duration: 1, ease: 'power4.out', stagger: .09, scrollTrigger: { trigger: 'footer', start: 'top 96%', toggleActions: 'play none none reverse' } });
 
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
