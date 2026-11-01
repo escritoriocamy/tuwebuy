@@ -194,9 +194,9 @@
   .hero p.lead{font-size:clamp(17px,1.5vw,21px);line-height:1.55;color:var(--ink-muted);max-width:520px;margin:0 0 32px;}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
   .hero-stage{position:relative;display:grid;place-items:center;min-height:clamp(380px,60vh,640px);perspective:1400px;}
-  .hs-in{position:relative;width:100%;height:100%;display:grid;place-items:center;transform-style:preserve-3d;}
-  .hero-stage .laptop{--w:clamp(300px,36vw,560px);position:absolute;right:-6%;top:6%;transform:rotateY(-14deg) rotateX(6deg) rotateZ(2deg);transform-origin:center;opacity:.95;}
-  .hero-stage .iphone{--w:clamp(160px,17vw,264px);position:relative;left:-14%;bottom:-2%;transform:rotateY(10deg) rotateZ(-3deg);}
+  .hs-in{position:relative;width:100%;height:100%;display:grid;place-items:center;transform-style:flat;}
+  .hero-stage .laptop{--w:clamp(300px,36vw,560px);position:absolute;right:-6%;top:6%;transform:rotate(2.5deg);transform-origin:center;z-index:1;}
+  .hero-stage .iphone{--w:clamp(160px,17vw,264px);position:relative;left:-14%;bottom:-2%;transform:rotate(-3deg);z-index:2;}
   .hs-glow{position:absolute;inset:8% 6%;border-radius:50%;background:radial-gradient(closest-side,rgba(198,255,30,.35),rgba(34,199,240,.12) 55%,transparent 72%);filter:blur(40px);pointer-events:none;z-index:-1;}
   .sl{opacity:0;}
   .sl:first-child{opacity:1;}
@@ -804,6 +804,6 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=23"></script>
+<script src="main.js?v=24"></script>
 </body>
 </html>

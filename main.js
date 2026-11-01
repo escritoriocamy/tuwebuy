@@ -267,14 +267,14 @@
     var small = window.innerWidth < 900;
     var tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: small ? '+=135%' : '+=190%', pin: true, scrub: .7, anticipatePin: 1 } });
     tl.to(proxy, { p: N - 1, ease: 'none', duration: .86, onUpdate: paint }, 0); // el último sitio queda quieto un momento
-    tl.to('#iph', { scale: small ? 1.1 : 1.22, rotateY: 0, rotateZ: 0, y: small ? 10 : 20, ease: 'none', duration: 1 }, 0);
-    tl.to('#laptop', { x: small ? 10 : 50, scale: .94, opacity: .75, ease: 'none', duration: 1 }, 0);
+    tl.to('#iph', { scale: small ? 1.1 : 1.22, rotation: 0, y: small ? 10 : 20, ease: 'none', duration: 1 }, 0);
+    tl.to('#laptop', { x: small ? 10 : 50, scale: .94, rotation: 0, ease: 'none', duration: 1 }, 0);
     tl.to('.hero-copy', { y: -70, opacity: 0, ease: 'power1.in', duration: .4 }, .6);
     tl.to('#hsin', { y: small ? -10 : -30, ease: 'none', duration: 1 }, 0);
     // inclinación con el puntero
     if (fine) {
       var rx = gsap.quickTo('#hsin', 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo('#hsin', 'rotationY', { duration: .8, ease: 'power3' });
-      $('#hero').addEventListener('pointermove', function (e) { ry((e.clientX / window.innerWidth - .5) * 12); rx((.5 - e.clientY / window.innerHeight) * 8); });
+      $('#hero').addEventListener('pointermove', function (e) { ry((e.clientX / window.innerWidth - .5) * 6); rx((.5 - e.clientY / window.innerHeight) * 4); });
     }
   }
 
