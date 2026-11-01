@@ -266,19 +266,10 @@
     paint();
     var small = window.innerWidth < 900;
     if (small) {
-      // celular: sin sección fijada. Las webs cambian solas, una cada pocos segundos, mientras la portada está a la vista.
-      var vis = true, cur = 0;
-      ScrollTrigger.create({ trigger: '#hero', start: 'top bottom', end: 'bottom top', onToggle: function (s) { vis = s.isActive; } });
-      var step = function () {
-        if (vis && !document.hidden) {
-          var next = (cur + 1) % N;
-          if (next === 0) proxy.p = -0.9; // vuelve a empezar sin recorrer todas
-          gsap.to(proxy, { p: next, duration: .9, ease: 'power2.inOut', onUpdate: paint, overwrite: true });
-          cur = next;
-        }
-        gsap.delayedCall(3.4, step);
-      };
-      gsap.delayedCall(4.2, step);
+      // celular: la portada queda fija y las webs cambian con el scroll; no se puede seguir bajando hasta llegar a la última (Haras)
+      var tlm = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: function () { return '+=' + Math.round(window.innerHeight * 0.72 * N); }, pin: true, scrub: .5, anticipatePin: 1, invalidateOnRefresh: true } });
+      tlm.to(proxy, { p: N - 1, ease: 'none', duration: .86, onUpdate: paint }, 0);
+      tlm.to({}, { duration: .14 }, .86);
       return;
     }
     var tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=190%', pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true } });
