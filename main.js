@@ -161,7 +161,7 @@
     var loc = ctx.getAttribLocation(pr, 'p'); ctx.enableVertexAttribArray(loc); ctx.vertexAttribPointer(loc, 2, ctx.FLOAT, false, 0, 0);
     var uR = ctx.getUniformLocation(pr, 'r'), uT = ctx.getUniformLocation(pr, 't'), uM = ctx.getUniformLocation(pr, 'm'), uS = ctx.getUniformLocation(pr, 's');
     function resize() {
-      var sc = Math.min(window.devicePixelRatio || 1, 1) * 0.5;
+      var sc = window.innerWidth < 900 ? 0.32 : 0.5; // más liviano en celulares
       cv.width = Math.max(2, Math.round(window.innerWidth * sc)); cv.height = Math.max(2, Math.round(window.innerHeight * sc));
       ctx.viewport(0, 0, cv.width, cv.height); ctx.uniform2f(uR, cv.width, cv.height);
     }
@@ -178,7 +178,7 @@
     window.addEventListener('resize', function () { draw(last || 2.5); });
     gsap.ticker.add(function (time) {
       if (document.hidden) return;
-      if (time - last < 0.032) return; last = time;
+      if (time - last < (window.innerWidth < 900 ? 0.045 : 0.032)) return; last = time;
       draw(time + 2.5);
     });
     doc.classList.add('gl');
