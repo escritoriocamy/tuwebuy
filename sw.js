@@ -1,5 +1,5 @@
-const CACHE = 'tuwebuy-v1';
-const SHELL = ['./', './index.html', './icon.png', './icon-192.png', './icon-512.png', './manifest.webmanifest'];
+const CACHE = 'tuwebuy-v2';
+const SHELL = ['./', './index.html', './main.js', './icon.png', './icon-192.png', './icon-512.png', './manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)));
