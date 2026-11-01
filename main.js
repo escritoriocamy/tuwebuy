@@ -260,27 +260,33 @@
         phone[i].style.opacity = o; lap[i].style.opacity = o;
         phone[i].style.transform = t; lap[i].style.transform = t;
       }
-      var idx = Math.round(proxy.p);
+      var idx = clamp(Math.round(proxy.p), 0, N - 1);
       if (idx !== shown) { shown = idx; nm.innerHTML = '<b>0' + (idx + 1) + '</b> · ' + names[idx]; }
     }
     paint();
     var small = window.innerWidth < 900;
-    var tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: small ? '+=135%' : '+=190%', pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true } });
-    tl.to(proxy, { p: N - 1, ease: 'none', duration: .86, onUpdate: paint }, 0); // el último sitio queda quieto un momento
-    tl.to('#iph', { scale: small ? 1.1 : 1.22, rotation: 0, y: small ? 10 : 20, ease: 'none', duration: 1 }, 0);
-    tl.to('#laptop', { x: small ? 10 : 50, scale: .94, rotation: 0, ease: 'none', duration: 1 }, 0);
     if (small) {
-      // celular: el texto se va rápido y el notebook + celular suben hasta quedar enteros en pantalla
-      tl.to('.hero-copy', { y: -60, opacity: 0, ease: 'power1.in', duration: .32 }, .02);
-      tl.to('#hsin', { y: function () {
-        var hero = $('#hero'), st = $('#stage');
-        var top0 = parseFloat(getComputedStyle(hero).paddingTop) + st.offsetTop;
-        return -Math.max(0, top0 - Math.max(84, (window.innerHeight - st.offsetHeight * 1.05) * 0.25));
-      }, ease: 'power2.out', duration: .4 }, .02);
-    } else {
-      tl.to('.hero-copy', { y: -70, opacity: 0, ease: 'power1.in', duration: .4 }, .6);
-      tl.to('#hsin', { y: -30, ease: 'none', duration: 1 }, 0);
+      // celular: sin sección fijada. Las webs cambian solas, una cada pocos segundos, mientras la portada está a la vista.
+      var vis = true, cur = 0;
+      ScrollTrigger.create({ trigger: '#hero', start: 'top bottom', end: 'bottom top', onToggle: function (s) { vis = s.isActive; } });
+      var step = function () {
+        if (vis && !document.hidden) {
+          var next = (cur + 1) % N;
+          if (next === 0) proxy.p = -0.9; // vuelve a empezar sin recorrer todas
+          gsap.to(proxy, { p: next, duration: .9, ease: 'power2.inOut', onUpdate: paint, overwrite: true });
+          cur = next;
+        }
+        gsap.delayedCall(3.4, step);
+      };
+      gsap.delayedCall(4.2, step);
+      return;
     }
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=190%', pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.to(proxy, { p: N - 1, ease: 'none', duration: .86, onUpdate: paint }, 0); // el último sitio queda quieto un momento
+    tl.to('#iph', { scale: 1.22, rotation: 0, y: 20, ease: 'none', duration: 1 }, 0);
+    tl.to('#laptop', { x: 50, scale: .94, rotation: 0, ease: 'none', duration: 1 }, 0);
+    tl.to('.hero-copy', { y: -70, opacity: 0, ease: 'power1.in', duration: .4 }, .6);
+    tl.to('#hsin', { y: -30, ease: 'none', duration: 1 }, 0);
     // inclinación con el puntero
     if (fine) {
       var rx = gsap.quickTo('#hsin', 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo('#hsin', 'rotationY', { duration: .8, ease: 'power3' });
