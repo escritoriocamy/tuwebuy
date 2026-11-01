@@ -502,10 +502,11 @@
 
   /* ---------- cta final ---------- */
   .final{position:relative;padding:clamp(90px,14vw,200px) 0 clamp(60px,8vw,110px);text-align:center;overflow:hidden;}
-  .final h2{font:800 clamp(52px,12vw,190px)/.88 var(--font-display);letter-spacing:-.05em;text-transform:uppercase;margin:0 0 22px;}
-  .final h2 .g{display:block;background:var(--grad-title);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+  .final h2{font:800 clamp(40px,10.4vw,172px)/.9 var(--font-display);letter-spacing:-.05em;text-transform:uppercase;margin:0 0 22px;}
+  .final h2 .g{display:block;white-space:nowrap;}
+  .final h2 .gt{background:var(--grad-title);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
   .final h2 .accent{-webkit-text-fill-color:var(--accent-lime);text-transform:none;font-weight:600;}
-  .qm{display:inline-block;transform:rotate(180deg);margin-right:.06em;-webkit-text-fill-color:var(--accent-lime);color:var(--accent-lime);}
+  .qm{display:inline-block;transform:rotate(180deg);margin-right:.06em;color:var(--accent-lime);-webkit-text-fill-color:var(--accent-lime);background:none;}
   .final p.sub{color:var(--ink-muted);font-size:clamp(16px,1.6vw,20px);max-width:44ch;margin:0 auto 36px;line-height:1.55;}
   .final .acts{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;}
   .final .mail{margin-top:28px;font:700 16px var(--font-body);color:var(--ink-muted);}
@@ -771,7 +772,7 @@
   <!-- CONTACTO -->
   <section class="final" id="contacto">
     <div class="wrap">
-      <h2 id="fh"><span class="g"><span class="qm">?</span>Empezamos</span><span class="g"><em class="accent">tu web?</em></span></h2>
+      <h2 id="fh"><span class="g"><span class="qm">?</span><span class="gt">Empezamos</span></span><span class="g"><em class="accent">tu web?</em></span></h2>
       <p class="sub">Contanos tu idea y la armamos a tu medida. Te respondemos por WhatsApp.</p>
       <div class="acts">
         <a class="btn btn-primary btn-xl magnetic" id="bigwa" href="https://wa.me/59899515010?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tuwebuy" target="_blank" rel="noopener">
@@ -803,6 +804,6 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=17"></script>
+<script src="main.js?v=19"></script>
 </body>
 </html>
