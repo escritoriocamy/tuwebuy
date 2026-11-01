@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/escritorio-m.webp" />
+<link rel="preload" as="image" href="img/consultorio-m.webp" />
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -281,6 +281,25 @@
     html:not(.anim) .slide-media .iphone{--w:150px}
   }
 
+  /* ---------- más trabajos ---------- */
+  .more{padding:clamp(50px,7vw,100px) 0 clamp(20px,3vw,40px);}
+  .more-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,40px);}
+  .more-head h3{font:800 clamp(34px,5vw,64px)/.95 var(--font-display);letter-spacing:-.035em;margin:0;text-transform:uppercase;}
+  .more-head .accent{text-transform:none;font-weight:600;}
+  .more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px);}
+  @media (max-width:860px){.more-grid{grid-template-columns:1fr}}
+  .mcard{display:flex;flex-direction:column;text-decoration:none;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(160deg,rgba(248,248,255,.08),rgba(248,248,255,.02)),rgba(18,58,107,.5);border:1px solid var(--border);transition:transform .45s var(--ease-out),border-color .3s,opacity .4s,filter .4s;}
+  .mshot{aspect-ratio:16/10;overflow:hidden;background:rgba(0,0,0,.2);}
+  .mshot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s var(--ease-out);}
+  .mbody{padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:6px;flex:1;}
+  .mbody .rubro{font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-lime);}
+  .mbody h4{font:800 clamp(20px,2vw,26px)/1.05 var(--font-display);letter-spacing:-.02em;margin:0;}
+  .mbody p{margin:0;color:var(--ink-muted);font-size:14.5px;line-height:1.55;flex:1;}
+  .mlink{margin-top:10px;font:700 14px var(--font-body);color:var(--accent-lime);}
+  .mcard.dim{opacity:.5;filter:saturate(.5);}
+  .mcard.dim .rubro,.mcard.dim .mlink{color:var(--ink-muted);}
+  @media (hover:hover) and (pointer:fine){.mcard:hover{transform:translateY(-6px);border-color:rgba(198,255,30,.5)}.mcard:hover .mshot img{transform:scale(1.05)}.mcard.dim:hover{opacity:.9;filter:none}}
+
   /* ---------- bento ---------- */
   .incl{padding:clamp(70px,10vw,140px) 0;}
   .incl-head{display:grid;gap:10px;margin-bottom:clamp(30px,5vw,64px);}
@@ -520,26 +539,22 @@
         <div class="hs-glow"></div>
         <div class="hs-in" id="hsin">
           <div class="laptop" id="laptop"><div class="lscreen"><div class="lin" id="lscr">
-            <img class="sl" src="img/escritorio-d.webp" alt="" width="1200" height="750">
-            <img class="sl" src="img/barto-d.webp" alt="" width="1200" height="750" loading="lazy">
-            <img class="sl" src="img/grosso-d.webp" alt="" width="1200" height="750" loading="lazy">
-            <img class="sl" src="img/consultorio-d.webp" alt="" width="1200" height="750" loading="lazy">
-            <img class="sl" src="img/timbo-d.webp" alt="" width="1200" height="750" loading="lazy">
-            <img class="sl" src="img/valentino-d.webp" alt="" width="1200" height="750" loading="lazy">
-            <img class="sl" src="img/siguiendo-d.webp" alt="" width="1200" height="750" loading="lazy">
+            <img class="sl" data-name="Consultorio Oftalmológico" src="img/consultorio-d.webp" alt="" width="1200" height="750">
+            <img class="sl" data-name="El Barto" src="img/barto-d.webp" alt="" width="1200" height="750" loading="lazy">
+            <img class="sl" data-name="Grosso's Barbershop" src="img/grosso-d.webp" alt="" width="1200" height="750" loading="lazy">
+            <img class="sl" data-name="Haras Santa María" src="img/haras-d.webp" alt="" width="1200" height="750" loading="lazy">
+            <img class="sl" data-name="Valentino Alonso" src="img/valentino-d.webp" alt="" width="1200" height="750" loading="lazy">
           </div></div><div class="lbase"></div></div>
           <div class="iphone" id="iph"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb l" style="top:38%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i>
             <div class="ibz"><div class="iscreen" id="iscr"><div class="glare"></div>
-              <img class="sl" src="img/escritorio-m.webp" alt="" width="780" height="1688">
-              <img class="sl" src="img/barto-m.webp" alt="" width="780" height="1688" loading="lazy">
-              <img class="sl" src="img/grosso-m.webp" alt="" width="780" height="1688" loading="lazy">
-              <img class="sl" src="img/consultorio-m.webp" alt="" width="780" height="1688" loading="lazy">
-              <img class="sl" src="img/timbo-m.webp" alt="" width="780" height="1688" loading="lazy">
-              <img class="sl" src="img/valentino-m.webp" alt="" width="780" height="1688" loading="lazy">
-              <img class="sl" src="img/siguiendo-m.webp" alt="" width="780" height="1688" loading="lazy">
+            <img class="sl" data-name="Consultorio Oftalmológico" src="img/consultorio-m.webp" alt="" width="780" height="1688">
+            <img class="sl" data-name="El Barto" src="img/barto-m.webp" alt="" width="780" height="1688" loading="lazy">
+            <img class="sl" data-name="Grosso's Barbershop" src="img/grosso-m.webp" alt="" width="780" height="1688" loading="lazy">
+            <img class="sl" data-name="Haras Santa María" src="img/haras-m.webp" alt="" width="780" height="1688" loading="lazy">
+            <img class="sl" data-name="Valentino Alonso" src="img/valentino-m.webp" alt="" width="780" height="1688" loading="lazy">
             </div></div></div>
         </div>
-        <div class="hs-name" id="hsname"><b>01</b> · Escritorio Camy</div>
+        <div class="hs-name" id="hsname"><b>01</b> · Consultorio Oftalmológico</div>
       </div>
     </div>
   </section>
@@ -578,28 +593,28 @@
     </div>
     <div class="g-track" id="gtrack">
 
+      <article class="slide" style="--glow:rgba(42,121,166,.34)">
+        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>consultoriooftalmologicosj.com</span></div><div class="shot"><img src="img/consultorio-d.webp" alt="Captura del sitio Consultorio Oftalmológico en computadora" width="1200" height="750" loading="lazy"></div></div>
+          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/consultorio-m.webp" alt="Captura del sitio Consultorio Oftalmológico en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
+        <div class="slide-copy"><span class="num">01</span><span class="rubro">Salud</span><h3>Consultorio Oftalmológico</h3><p>Agenda de turnos oftalmológicos sin espera, con calendario en tiempo real y panel privado, en San José de Mayo.</p><a class="btn btn-primary magnetic" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
+      </article>
+
       <article class="slide" style="--glow:rgba(249,178,51,.28)">
         <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>elbarto.com.uy</span></div><div class="shot"><img src="img/barto-d.webp" alt="Captura del sitio El Barto en computadora" width="1200" height="750" loading="lazy"></div></div>
           <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/barto-m.webp" alt="Captura del sitio El Barto en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">01</span><span class="rubro">Gastronomía</span><h3>El Barto</h3><p>Pizzas a la piedra y smash burgers en Colonia Valdense, con armador de pizza, pedidos online y confirmación por WhatsApp.</p><a class="btn btn-primary magnetic" href="https://elbarto.com.uy" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
+        <div class="slide-copy"><span class="num">02</span><span class="rubro">Gastronomía</span><h3>El Barto</h3><p>Pizzas a la piedra y smash burgers en Colonia Valdense, con armador de pizza, pedidos online y confirmación por WhatsApp.</p><a class="btn btn-primary magnetic" href="https://elbarto.com.uy" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
       </article>
 
       <article class="slide" style="--glow:rgba(245,197,24,.22)">
         <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>grossosbarber.com</span></div><div class="shot"><img src="img/grosso-d.webp" alt="Captura del sitio Grosso's Barbershop en computadora" width="1200" height="750" loading="lazy"></div></div>
           <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/grosso-m.webp" alt="Captura del sitio Grosso's Barbershop en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">02</span><span class="rubro">Barbería</span><h3>Grosso's Barbershop</h3><p>Barbería en Colonia Valdense con reservas online de turnos y panel de administración.</p><a class="btn btn-primary magnetic" href="https://grossosbarber.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
+        <div class="slide-copy"><span class="num">03</span><span class="rubro">Barbería</span><h3>Grosso's Barbershop</h3><p>Barbería en Colonia Valdense con reservas online de turnos y panel de administración.</p><a class="btn btn-primary magnetic" href="https://grossosbarber.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
       </article>
 
-      <article class="slide" style="--glow:rgba(42,121,166,.34)">
-        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>consultoriooftalmologicosj.com</span></div><div class="shot"><img src="img/consultorio-d.webp" alt="Captura del sitio Consultorio Oftalmológico en computadora" width="1200" height="750" loading="lazy"></div></div>
-          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/consultorio-m.webp" alt="Captura del sitio Consultorio Oftalmológico en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">03</span><span class="rubro">Salud</span><h3>Consultorio Oftalmológico</h3><p>Agenda de turnos oftalmológicos sin espera, con calendario en tiempo real y panel privado, en San José de Mayo.</p><a class="btn btn-primary magnetic" href="https://consultoriooftalmologicosj.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
-      </article>
-
-      <article class="slide" style="--glow:rgba(70,160,80,.28)">
-        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>viverotimboguazu.com</span></div><div class="shot"><img src="img/timbo-d.webp" alt="Captura del sitio Timbó Guazú Vivero en computadora" width="1200" height="750" loading="lazy"></div></div>
-          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/timbo-m.webp" alt="Captura del sitio Timbó Guazú Vivero en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">04</span><span class="rubro">Vivero</span><h3>Timbó Guazú Vivero</h3><p>Catálogo de más de 350 plantas: el cliente arma su pedido en la web y lo confirma por WhatsApp, para retirar o recibir en casa.</p><a class="btn btn-primary magnetic" href="https://viverotimboguazu.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
+      <article class="slide" style="--glow:rgba(60,90,170,.32)">
+        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>escritoriocamy.github.io/haras-santa-maria</span></div><div class="shot"><img src="img/haras-d.webp" alt="Captura del sitio Haras Santa María en computadora" width="1200" height="750" loading="lazy"></div></div>
+          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/haras-m.webp" alt="Captura del sitio Haras Santa María en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
+        <div class="slide-copy"><span class="num">04</span><span class="rubro">Haras · Caballos de carrera</span><h3>Haras Santa María</h3><p>Cría de caballos sangre pura de carrera en Juncal, San José: padrillos, yeguas madre y ejemplares en venta, con panel privado.</p><a class="btn btn-primary magnetic" href="https://escritoriocamy.github.io/haras-santa-maria/" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
       </article>
 
       <article class="slide" style="--glow:rgba(37,99,235,.34)">
@@ -608,26 +623,21 @@
         <div class="slide-copy"><span class="num">05</span><span class="rubro">Autos usados</span><h3>Valentino Alonso</h3><p>Catálogo de autos usados seleccionados en Montevideo, con filtros por marca, precio y kilometraje, y trámite acompañado.</p><a class="btn btn-primary magnetic" href="https://valentinoalonso.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
       </article>
 
-      <article class="slide" style="--glow:rgba(40,120,70,.3)">
-        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>escritoriocamy.com.uy</span></div><div class="shot"><img src="img/escritorio-d.webp" alt="Captura del sitio Escritorio Camy en computadora" width="1200" height="750" loading="lazy"></div></div>
-          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/escritorio-m.webp" alt="Captura del sitio Escritorio Camy en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">06</span><span class="rubro">Remates rurales</span><h3>Escritorio Camy</h3><p>Más de un siglo acompañando al productor rural, con remates de hacienda en vivo y buscador de lotes.</p><a class="btn btn-primary magnetic" href="https://escritoriocamy.com.uy/index.html" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
-      </article>
-
-      <article class="slide" style="--glow:rgba(200,162,74,.3)">
-        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>siguiendoelcamino.com</span></div><div class="shot"><img src="img/siguiendo-d.webp" alt="Captura del sitio Siguiendo el Camino en computadora" width="1200" height="750" loading="lazy"></div></div>
-          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/siguiendo-m.webp" alt="Captura del sitio Siguiendo el Camino en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">07</span><span class="rubro">Remates y liquidación</span><h3>Siguiendo el Camino</h3><p>Del galpón al comprador: remates y liquidación de bienes en desuso. Cliente: Pablo Amado.</p><a class="btn btn-primary magnetic" href="https://siguiendoelcamino.com" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
-      </article>
-
-      <article class="slide" style="--glow:rgba(242,183,5,.24)">
-        <div class="slide-media"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>viajes-camy.vercel.app</span></div><div class="shot"><img src="img/viajes-d.webp" alt="Captura de la app Viajes Camy en computadora" width="1200" height="750" loading="lazy"></div></div>
-          <div class="iphone"><i class="sb l" style="top:19%;height:5%"></i><i class="sb l" style="top:27%;height:9%"></i><i class="sb r" style="top:31%;height:14%"></i><div class="ibz"><div class="iscreen"><div class="glare"></div><img src="img/viajes-m.webp" alt="Captura de la app Viajes Camy en celular" width="780" height="1688" loading="lazy"></div></div></div></div>
-        <div class="slide-copy"><span class="num">08</span><span class="rubro">App familiar</span><h3>Viajes Camy</h3><p>Plataforma para coordinar viajes compartidos entre familiares en la ruta San José – Montevideo, con sistema de puntos.</p><a class="btn btn-primary magnetic" href="https://viajes-camy.vercel.app/" target="_blank" rel="noopener" data-cursor="Ver">Ver sitio →</a></div>
-      </article>
-
     </div>
-    <div class="g-ui" aria-hidden="true"><span class="g-count"><b id="gcur">01</b> / 08</span><span class="g-line"><i id="gfill"></i></span></div>
+    <div class="g-ui" aria-hidden="true"><span class="g-count"><b id="gcur">01</b> / <span id="gtot">05</span></span><span class="g-line"><i id="gfill"></i></span></div>
+  </section>
+
+
+  <!-- MÁS TRABAJOS -->
+  <section class="more" id="mas">
+    <div class="wrap">
+      <div class="more-head" data-reveal><span class="eyebrow">Y también</span><h3>Más <em class="accent">trabajos</em></h3></div>
+      <div class="more-grid">
+        <a class="mcard" data-reveal href="https://viverotimboguazu.com" target="_blank" rel="noopener" data-cursor="Ver"><div class="mshot"><img src="img/timbo-d.webp" alt="Captura del sitio Timbó Guazú Vivero" width="1200" height="750" loading="lazy"></div><div class="mbody"><span class="rubro">Vivero</span><h4>Timbó Guazú Vivero</h4><p>Catálogo de más de 350 plantas: el cliente arma su pedido y lo confirma por WhatsApp.</p><span class="mlink">Ver sitio →</span></div></a>
+        <a class="mcard" data-reveal href="https://escritoriocamy.com.uy/index.html" target="_blank" rel="noopener" data-cursor="Ver"><div class="mshot"><img src="img/escritorio-d.webp" alt="Captura del sitio Escritorio Camy" width="1200" height="750" loading="lazy"></div><div class="mbody"><span class="rubro">Remates rurales</span><h4>Escritorio Camy</h4><p>Más de un siglo acompañando al productor rural, con remates en vivo y buscador de lotes.</p><span class="mlink">Ver sitio →</span></div></a>
+        <a class="mcard dim" data-reveal href="https://siguiendoelcamino.com" target="_blank" rel="noopener"><div class="mshot"><img src="img/siguiendo-d.webp" alt="Captura del sitio Siguiendo el Camino" width="1200" height="750" loading="lazy"></div><div class="mbody"><span class="rubro">Remates y liquidación</span><h4>Siguiendo el Camino</h4><p>Remates y liquidación de bienes en desuso.</p><span class="mlink">Ver sitio →</span></div></a>
+      </div>
+    </div>
   </section>
 
   <!-- QUÉ INCLUYE -->
@@ -746,6 +756,6 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=11"></script>
+<script src="main.js?v=12"></script>
 </body>
 </html>

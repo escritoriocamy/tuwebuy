@@ -248,8 +248,8 @@
   gsap.set('#stage', { opacity: 0, y: 90, scale: .92 });
 
   function buildHero() {
-    var N = 7, names = ['Escritorio Camy', 'El Barto', "Grosso's Barbershop", 'Consultorio Oftalmológico', 'Timbó Guazú Vivero', 'Valentino Alonso', 'Siguiendo el Camino'];
     var phone = $$('#iscr .sl'), lap = $$('#lscr .sl'), nm = $('#hsname');
+    var N = phone.length, names = lap.map(function (e) { return e.getAttribute('data-name') || ''; });
     var proxy = { p: 0 }, shown = -1;
     function paint() {
       for (var i = 0; i < N; i++) { var o = clamp(1 - Math.abs(proxy.p - i), 0, 1); phone[i].style.opacity = o; lap[i].style.opacity = o; }
@@ -332,14 +332,14 @@
     gal.classList.add('is-h');
     var bg = $('.g-bg', gal); bg.innerHTML = '';
     slides.forEach(function (s) { var i = document.createElement('i'); i.style.setProperty('--glow', s.style.getPropertyValue('--glow')); bg.appendChild(i); });
-    var glows = $$('i', bg), cur = $('#gcur'), fill = $('#gfill');
+    var glows = $$('i', bg), cur = $('#gcur'), fill = $('#gfill'); $('#gtot').textContent = (n < 10 ? '0' : '') + n;
     var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
     var tween = gsap.to(track, { x: function () { return -dist(); }, ease: 'none',
       scrollTrigger: { trigger: gal, start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1,
         onUpdate: function (self) {
           var pos = self.progress * (n - 1);
           fill.style.transform = 'scaleX(' + self.progress.toFixed(4) + ')';
-          var idx = Math.round(pos); cur.textContent = '0' + (idx + 1);
+          var idx = Math.round(pos); cur.textContent = (idx + 1 < 10 ? '0' : '') + (idx + 1);
           glows.forEach(function (g, i) { g.style.opacity = clamp(1 - Math.abs(pos - i), 0, 1).toFixed(3); });
         } } });
     slides.forEach(function (s) {
