@@ -252,14 +252,21 @@
     var N = phone.length, names = lap.map(function (e) { return e.getAttribute('data-name') || ''; });
     var proxy = { p: 0 }, shown = -1;
     function paint() {
-      for (var i = 0; i < N; i++) { var o = clamp(1 - Math.abs(proxy.p - i), 0, 1); phone[i].style.opacity = o; lap[i].style.opacity = o; }
+      for (var i = 0; i < N; i++) {
+        var d = proxy.p - i, ad = Math.abs(d);
+        // cada web se ve nítida y completa; el cambio es corto (franja angosta) y con un leve deslizamiento
+        var o = clamp((0.54 - ad) / 0.1, 0, 1);
+        var t = 'translateY(' + (-d * 7).toFixed(2) + '%) scale(' + (1 + Math.min(ad, 1) * 0.03).toFixed(3) + ')';
+        phone[i].style.opacity = o; lap[i].style.opacity = o;
+        phone[i].style.transform = t; lap[i].style.transform = t;
+      }
       var idx = Math.round(proxy.p);
       if (idx !== shown) { shown = idx; nm.innerHTML = '<b>0' + (idx + 1) + '</b> · ' + names[idx]; }
     }
     paint();
     var small = window.innerWidth < 900;
     var tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: small ? '+=135%' : '+=190%', pin: true, scrub: .7, anticipatePin: 1 } });
-    tl.to(proxy, { p: N - 1, ease: 'none', duration: 1, onUpdate: paint }, 0);
+    tl.to(proxy, { p: N - 1, ease: 'none', duration: .86, onUpdate: paint }, 0); // el último sitio queda quieto un momento
     tl.to('#iph', { scale: small ? 1.1 : 1.22, rotateY: 0, rotateZ: 0, y: small ? 10 : 20, ease: 'none', duration: 1 }, 0);
     tl.to('#laptop', { x: small ? 10 : 50, scale: .94, opacity: .75, ease: 'none', duration: 1 }, 0);
     tl.to('.hero-copy', { y: -70, opacity: 0, ease: 'power1.in', duration: .4 }, .6);
